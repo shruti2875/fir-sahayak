@@ -1,0 +1,1364 @@
+[
+  {
+    "input": "my phone was stolen in market",
+    "output": "I, [Name], hereby report that my mobile phone was stolen from the market area on [Date]. Kindly take necessary action."
+  },
+  {
+    "input": "bike theft near college",
+    "output": "I, [Name], hereby report that my motorcycle was stolen near the college premises on [Date]. I request you to register the complaint."
+  },
+  {
+    "input": "wallet stolen in bus",
+    "output": "I, [Name], report that my wallet was stolen while traveling on a bus on [Date]. It contained cash and documents."
+  },
+  {
+    "input": "chain snatched on road",
+    "output": "I, [Name], report that my gold chain was snatched by an unknown person on the road on [Date]. Kindly take action."
+  },
+  {
+    "input": "laptop stolen from office",
+    "output": "I, [Name], report that my laptop was stolen from my office premises on [Date]. Kindly investigate."
+  },
+  {
+    "input": "car stolen from parking",
+    "output": "I, [Name], report that my car was stolen from the parking area on [Date]. I request immediate action."
+  },
+  {
+    "input": "phone lost in train",
+    "output": "I, [Name], report that I lost my mobile phone while traveling by train on [Date]. Kindly assist in recovery."
+  },
+  {
+    "input": "bag stolen in mall",
+    "output": "I, [Name], report that my bag was stolen from a shopping mall on [Date]. It contained valuables."
+  },
+  {
+    "input": "money stolen from house",
+    "output": "I, [Name], report that cash was stolen from my house on [Date]. Kindly investigate the matter."
+  },
+  {
+    "input": "upi fraud happened",
+    "output": "I, [Name], report that I was a victim of UPI fraud on [Date]. Money was deducted without my consent."
+  },
+  {
+    "input": "bike damaged by someone",
+    "output": "I, [Name], report that my bike was damaged by an unknown individual on [Date]. Kindly take action."
+  },
+  {
+    "input": "house burglary at night",
+    "output": "I, [Name], report that my house was burgled during the night on [Date]. Valuable items were stolen."
+  },
+  {
+    "input": "phone snatched by two people",
+    "output": "I, [Name], report that my mobile phone was snatched by two unknown persons on [Date]. Kindly take strict action."
+  },
+  {
+    "input": "id card lost",
+    "output": "I, [Name], report that my identity card was lost on [Date]. Kindly record this complaint."
+  },
+  {
+    "input": "cyber bullying on instagram",
+    "output": "I, [Name], report that I have been subjected to cyber bullying on Instagram on [Date]. Kindly take necessary action."
+  },
+  {
+    "input": "hit and run case",
+    "output": "I, [Name], report that my vehicle was hit by another vehicle which fled the scene on [Date]. Kindly investigate."
+  },
+  {
+    "input": "fake job scam online",
+    "output": "I, [Name], report that I was cheated in a fake job scam online on [Date]. Kindly take legal action."
+  },
+  {
+    "input": "documents stolen from bag",
+    "output": "I, [Name], report that important documents were stolen from my bag on [Date]. Kindly assist in recovery."
+  },
+  {
+    "input": "threat calls from unknown number",
+    "output": "I, [Name], report that I have been receiving threatening calls from an unknown number on [Date]. Kindly take action."
+  },
+  {
+    "input": "mobile hacked",
+    "output": "I, [Name], report that my mobile phone was hacked on [Date]. Unauthorized access was gained."
+  },
+
+  {
+    "input": "bike stolen from hostel",
+    "output": "I, [Name], report that my bike was stolen from the hostel premises on [Date]. Kindly take action."
+  },
+  {
+    "input": "gold ring stolen",
+    "output": "I, [Name], report that my gold ring was stolen on [Date]. Kindly investigate."
+  },
+  {
+    "input": "shop robbery",
+    "output": "I, [Name], report that my shop was robbed on [Date]. Goods and cash were stolen."
+  },
+  {
+    "input": "car window broken",
+    "output": "I, [Name], report that my car window was broken by unknown persons on [Date]. Kindly take action."
+  },
+  {
+    "input": "phone stolen in bus stand",
+    "output": "I, [Name], report that my phone was stolen at the bus stand on [Date]. Kindly investigate."
+  },
+  {
+    "input": "atm card fraud",
+    "output": "I, [Name], report that fraudulent transactions were made using my ATM card on [Date]. Kindly take action."
+  },
+  {
+    "input": "lost driving license",
+    "output": "I, [Name], report that my driving license was lost on [Date]. Kindly record this complaint."
+  },
+  {
+    "input": "scooter theft",
+    "output": "I, [Name], report that my scooter was stolen on [Date]. Kindly take necessary action."
+  },
+  {
+    "input": "harassment by neighbor",
+    "output": "I, [Name], report that I am being harassed by my neighbor on [Date]. Kindly take action."
+  },
+  {
+    "input": "fraud call asking otp",
+    "output": "I, [Name], report that I received a fraudulent call asking for OTP on [Date]. Kindly investigate."
+  },
+  {
+    "input": "chain snatching near temple",
+    "output": "I, [Name], report that my chain was snatched near a temple on [Date]. Kindly take action."
+  },
+  {
+    "input": "vehicle stolen from street",
+    "output": "I, [Name], report that my vehicle was stolen from the street on [Date]. Kindly investigate."
+  },
+  {
+    "input": "lost passport",
+    "output": "I, [Name], report that my passport was lost on [Date]. Kindly record the complaint."
+  },
+  {
+    "input": "online shopping fraud",
+    "output": "I, [Name], report that I was cheated in an online shopping fraud on [Date]. Kindly take action."
+  },
+  {
+    "input": "threat message on whatsapp",
+    "output": "I, [Name], report that I received threatening messages on WhatsApp on [Date]. Kindly investigate."
+  },
+  {
+    "input": "office theft",
+    "output": "I, [Name], report that theft occurred in my office on [Date]. Items were stolen."
+  },
+  {
+    "input": "lost debit card",
+    "output": "I, [Name], report that my debit card was lost on [Date]. Kindly record this complaint."
+  },
+  {
+    "input": "fraud loan call",
+    "output": "I, [Name], report that I received a fraudulent loan call on [Date]. Kindly take action."
+  },
+  {
+    "input": "kid harassment in school",
+    "output": "I, [Name], report that my child was harassed in school on [Date]. Kindly investigate."
+  },
+  {
+    "input": "house trespassing",
+    "output": "I, [Name], report that someone trespassed into my house on [Date]. Kindly take action."
+  },
+  {
+    "input": "phone stolen in market",
+    "output": "I, [Name], report that my phone was stolen while I was shopping in the local market."
+  },
+  {
+    "input": "bike theft near college",
+    "output": "I hereby report that my bike was stolen from the parking lot near the college campus."
+  },
+  {
+    "input": "laptop snatched at cafe",
+    "output": "I am filing a report regarding my laptop, which was snatched from my table at the cafe."
+  },
+  {
+    "input": "wallet picked at station",
+    "output": "I wish to report that my wallet was pickpocketed while I was boarding a train at the station."
+  },
+  {
+    "input": "camera taken from hotel",
+    "output": "I report the theft of my digital camera from my hotel room during my stay."
+  },
+  {
+    "input": "car broken into at mall",
+    "output": "I am reporting a vehicle break-in at the mall parking where my stereo was stolen."
+  },
+  {
+    "input": "tablet stolen in library",
+    "output": "I, [Name], report that my tablet was stolen from the university library study hall."
+  },
+  {
+    "input": "watch missing from gym",
+    "output": "I am writing to report that my wristwatch went missing from the gym locker room."
+  },
+  {
+    "input": "handbag snatched on street",
+    "output": "I hereby report that my handbag was snatched by a person on a motorcycle on Main Street."
+  },
+  {
+    "input": "bicycle stolen from porch",
+    "output": "I am filing a report for my bicycle that was stolen from my front porch overnight."
+  },
+  {
+    "input": "backpack taken at airport",
+    "output": "I report that my backpack was stolen from the terminal waiting area at the airport."
+  },
+  {
+    "input": "jewelry stolen during burglary",
+    "output": "I am reporting a home burglary where several items of jewelry were stolen from the bedroom."
+  },
+  {
+    "input": "scooter theft at park",
+    "output": "I wish to report that my electric scooter was stolen from the park entrance."
+  },
+  {
+    "input": "purse stolen at grocery store",
+    "output": "I, [Name], report that my purse was stolen from my shopping cart at the grocery store."
+  },
+  {
+    "input": "tools stolen from work van",
+    "output": "I am reporting the theft of power tools from my work van parked in the driveway."
+  },
+  {
+    "input": "passport missing from bag",
+    "output": "I hereby report that my passport was stolen from my carry-on bag during transit."
+  },
+  {
+    "input": "headphones taken at office",
+    "output": "I report that my noise-canceling headphones were stolen from my desk at the office."
+  },
+  {
+    "input": "drone stolen at beach",
+    "output": "I am filing a report for my drone which was stolen while I was at the public beach."
+  },
+  {
+    "input": "cash stolen from locker",
+    "output": "I wish to report that a sum of cash was stolen from my locker at the sports club."
+  },
+  {
+    "input": "jacket stolen from restaurant",
+    "output": "I report that my leather jacket was stolen from the coat rack at the restaurant."
+  },
+  {
+    "input": "kindle snatched on bus",
+    "output": "I am reporting that my e-reader was snatched from my hand while I was riding the city bus."
+  },
+  {
+    "input": "gaming console stolen at home",
+    "output": "I, [Name], report the theft of my gaming console following a break-in at my residence."
+  },
+  {
+    "input": "sunglasses taken from car",
+    "output": "I am filing a report for my designer sunglasses stolen from my car's dashboard."
+  },
+  {
+    "input": "guitar stolen from backstage",
+    "output": "I wish to report that my acoustic guitar was stolen from the backstage area after the concert."
+  },
+  {
+    "input": "package stolen from doorstep",
+    "output": "I am reporting that a delivered parcel was stolen from my doorstep this afternoon."
+  },
+  {
+    "input": "skateboard stolen at plaza",
+    "output": "I hereby report that my skateboard was stolen while I was at the downtown plaza."
+  },
+  {
+    "input": "briefcase missing from taxi",
+    "output": "I report that I left my briefcase in a taxi and it was subsequently stolen."
+  },
+  {
+    "input": "lawn mower stolen from shed",
+    "output": "I am reporting the theft of my lawn mower from the garden shed in my backyard."
+  },
+  {
+    "input": "helmet stolen from motorcycle",
+    "output": "I wish to report that my riding helmet was stolen from where it was locked to my bike."
+  },
+  {
+    "input": "smartwatch taken at pool",
+    "output": "I am filing a report for my smartwatch which was stolen from the poolside changing area."
+  },
+  {
+    "input": "stroller stolen at zoo",
+    "output": "I report that my baby stroller was stolen while we were visiting the zoo exhibits."
+  },
+  {
+    "input": "drill stolen from job site",
+    "output": "I, [Name], report that a cordless drill was stolen from the active construction site."
+  },
+  {
+    "input": "power bank stolen at hostel",
+    "output": "I am reporting that my portable charger was stolen from my bed in the hostel room."
+  },
+  {
+    "input": "necklace snatched at fair",
+    "output": "I hereby report that my gold necklace was snatched during the crowded street fair."
+  },
+  {
+    "input": "keys stolen from pocket",
+    "output": "I wish to report that my house and car keys were stolen from my pocket at the pub."
+  },
+  {
+    "input": "luggage stolen at bus terminal",
+    "output": "I am reporting that my suitcase was stolen from the luggage compartment of the bus."
+  },
+  {
+    "input": "monitor stolen from workspace",
+    "output": "I report that a computer monitor was stolen from the shared co-working space."
+  },
+  {
+    "input": "speaker taken from party",
+    "output": "I am filing a report for my Bluetooth speaker that was stolen during a house party."
+  },
+  {
+    "input": "boots stolen from mudroom",
+    "output": "I report that my hiking boots were stolen from the mudroom of the shared cabin."
+  },
+  {
+    "input": "cash snatched at ATM",
+    "output": "I wish to report that cash was snatched from my hand immediately after an ATM withdrawal."
+  },
+  {
+    "input": "spare tire stolen from SUV",
+    "output": "I am reporting that the spare tire attached to the back of my SUV was stolen."
+  },
+  {
+    "input": "umbrella taken from stand",
+    "output": "I hereby report the theft of my expensive umbrella from the stand at the office entrance."
+  },
+  {
+    "input": "fishing gear stolen from boat",
+    "output": "I am filing a report for fishing rods and tackle stolen from my boat at the pier."
+  },
+  {
+    "input": "perfume stolen from vanity",
+    "output": "I report that several bottles of perfume were stolen during a house viewing."
+  },
+  {
+    "input": "mountain bike taken from trail",
+    "output": "I wish to report that my mountain bike was stolen while I was taking a break on the trail."
+  },
+  {
+    "input": "tent stolen from campsite",
+    "output": "I am reporting that my camping tent was stolen while I was away from the site."
+  },
+  {
+    "input": "projector stolen from classroom",
+    "output": "I, [Name], report that a portable projector was stolen from the classroom over the weekend."
+  },
+  {
+    "input": "microscope stolen from lab",
+    "output": "I am filing a report regarding a microscope stolen from the science laboratory."
+  },
+  {
+    "input": "gold ring missing from hotel safe",
+    "output": "I wish to report that a gold ring was stolen from the electronic safe in my hotel room."
+  },
+  {
+    "input": "van stolen from warehouse",
+    "output": "I hereby report that a company delivery van was stolen from the warehouse loading dock."
+  },
+  {
+    "input": "moped stolen from sidewalk",
+    "output": "I am reporting that my moped was stolen from the sidewalk where it was parked."
+  },
+  {
+    "input": "toolbox stolen from garage",
+    "output": "I report that my complete mechanical toolbox was stolen from my open garage."
+  },
+  {
+    "input": "video game stolen from store",
+    "output": "I am filing a report for a retail theft incident involving several video game discs."
+  },
+  {
+    "input": "chainsaw stolen from truck bed",
+    "output": "I wish to report that a chainsaw was stolen from the back of my pickup truck."
+  },
+  {
+    "input": "snowboard taken from resort",
+    "output": "I hereby report that my snowboard was stolen from the rack at the ski resort."
+  },
+  {
+    "input": "surfboard stolen from beach car",
+    "output": "I am reporting that my surfboard was stolen from the roof rack of my car at the beach."
+  },
+  {
+    "input": "violin stolen from music school",
+    "output": "I report that my violin was stolen from the practice room at the music academy."
+  },
+  {
+    "input": "ebike stolen from charging station",
+    "output": "I am filing a report for my e-bike stolen while it was plugged into a charging station."
+  },
+  {
+    "input": "gas cylinder stolen from yard",
+    "output": "I wish to report that a propane gas cylinder was stolen from my backyard grill area."
+  },
+  {
+    "input": "generator stolen from food truck",
+    "output": "I report that the external generator for my food truck was stolen overnight."
+  },
+  {
+    "input": "telescope stolen from balcony",
+    "output": "I am reporting the theft of a telescope from my second-floor balcony."
+  },
+  {
+    "input": "printer stolen from reception",
+    "output": "I hereby report that the office printer was stolen from the reception desk area."
+  },
+  {
+    "input": "airpods snatched at gym",
+    "output": "I am filing a report for my wireless earbuds that were stolen from the gym bench."
+  },
+  {
+    "input": "license plate stolen from car",
+    "output": "I wish to report that both license plates were stolen from my vehicle."
+  },
+  {
+    "input": "catalytic converter stolen",
+    "output": "I report that the catalytic converter was cut and stolen from my car while parked."
+  },
+  {
+    "input": "tires stolen from parked car",
+    "output": "I am reporting that all four tires were stolen from my car, leaving it on blocks."
+  },
+  {
+    "input": "handbag taken from cinema",
+    "output": "I hereby report that my handbag was stolen from the seat next to me during a movie."
+  },
+  {
+    "input": "rug stolen from porch",
+    "output": "I wish to report that an outdoor area rug was stolen from my front porch."
+  },
+  {
+    "input": "swing set stolen from garden",
+    "output": "I am filing a report for a metal swing set stolen from my residential garden."
+  },
+  {
+    "input": "statue stolen from front yard",
+    "output": "I report that a decorative garden statue was stolen from my property."
+  },
+  {
+    "input": "solar lights stolen from path",
+    "output": "I am reporting that several solar-powered pathway lights were stolen from my yard."
+  },
+  {
+    "input": "mailbox stolen from post",
+    "output": "I wish to report that my entire mailbox was removed and stolen from its post."
+  },
+  {
+    "input": "welding machine stolen from shop",
+    "output": "I hereby report the theft of a welding machine from my workshop."
+  },
+  {
+    "input": "compressor stolen from site",
+    "output": "I am filing a report for an air compressor stolen from the building site."
+  },
+  {
+    "input": "suit stolen from dry cleaners",
+    "output": "I report that a designer suit was stolen from the garment rack at the cleaners."
+  },
+  {
+    "input": "medical kit stolen from ambulance",
+    "output": "I am reporting that an emergency medical kit was stolen from an idling ambulance."
+  },
+  {
+    "input": "wheelchair stolen from hospital",
+    "output": "I wish to report that a manual wheelchair was stolen from the hospital lobby."
+  },
+  {
+    "input": "stroller stolen from theme park",
+    "output": "I hereby report that our baby stroller was stolen while we were on a ride."
+  },
+  {
+    "input": "binoculars stolen at stadium",
+    "output": "I am filing a report for binoculars stolen from my seat at the football stadium."
+  },
+  {
+    "input": "flag stolen from pole",
+    "output": "I report that a ceremonial flag was stolen from the pole in front of the building."
+  },
+  {
+    "input": "bench stolen from park",
+    "output": "I am reporting that a memorial wooden bench was stolen from the public park."
+  },
+  {
+    "input": "vending machine broken into",
+    "output": "I wish to report that a vending machine was vandalized and the cash box stolen."
+  },
+  {
+    "input": "car battery stolen",
+    "output": "I hereby report that the battery was stolen from under the hood of my parked car."
+  },
+  {
+    "input": "radio stolen from boat",
+    "output": "I am filing a report for a marine radio stolen from the cockpit of my boat."
+  },
+  {
+    "input": "life jackets stolen from dock",
+    "output": "I report that four life jackets were stolen from the storage bin on the dock."
+  },
+  {
+    "input": "golf clubs stolen from trunk",
+    "output": "I am reporting the theft of a set of golf clubs from the trunk of my car."
+  },
+  {
+    "input": "tennis racket stolen at court",
+    "output": "I wish to report that my tennis racket was stolen from the bench at the courts."
+  },
+  {
+    "input": "pool cues stolen from hall",
+    "output": "I hereby report that my custom pool cues were stolen from the billiard hall."
+  },
+  {
+    "input": "bow and arrow stolen from club",
+    "output": "I am filing a report for archery equipment stolen from the local club."
+  },
+  {
+    "input": "weights stolen from home gym",
+    "output": "I report that a set of dumbbells was stolen from my outdoor home gym area."
+  },
+  {
+    "input": "yoga mat stolen from studio",
+    "output": "I am reporting that my premium yoga mat was stolen from the studio shelf."
+  },
+  {
+    "input": "climbing gear stolen from van",
+    "output": "I wish to report that my rock climbing harness and ropes were stolen from my van."
+  },
+  {
+    "input": "keyboard stolen from church",
+    "output": "I hereby report that an electronic keyboard was stolen from the church hall."
+  },
+  {
+    "input": "amplifier stolen from garage band",
+    "output": "I am filing a report for a guitar amplifier stolen from our practice garage."
+  },
+  {
+    "input": "microphone stolen from stage",
+    "output": "I report that a wireless microphone was stolen from the stage after the event."
+  },
+  {
+    "input": "mixing board stolen from studio",
+    "output": "I am reporting the theft of a digital mixing board from the recording studio."
+  },
+  {
+    "input": "hard drive stolen from office",
+    "output": "I wish to report that an external hard drive was stolen from my office cubicle."
+  },
+  {
+    "input": "monitor stolen from school",
+    "output": "I hereby report that a computer monitor was stolen from the elementary school."
+  },
+  {
+    "input": "router stolen from cafe",
+    "output": "I am filing a report for a Wi-Fi router stolen from the wall mount at the cafe."
+  },
+  {
+    "input": "printer ink stolen from storage",
+    "output": "I report that several boxes of printer toner were stolen from the supply closet."
+  },
+
+  {
+    "input": "armed robbery at pharmacy",
+    "output": "I, [Name], am reporting an armed robbery that occurred at the local pharmacy where an individual brandished a weapon and demanded narcotics and cash."
+  },
+  {
+    "input": "residential burglary with forced entry",
+    "output": "I am filing a formal report regarding a home burglary; the suspects forced entry through the rear door and stole high-value electronics and safes."
+  },
+  {
+    "input": "aggravated assault at gas station",
+    "output": "I hereby report an incident of aggravated assault where a victim was physically attacked with a blunt object during an altercation at the gas station."
+  },
+  {
+    "input": "grand theft auto from parking garage",
+    "output": "I wish to report the theft of my vehicle, a [Model/Year], which was stolen from a secured underground parking garage overnight."
+  },
+  {
+    "input": "commercial break-in at warehouse",
+    "output": "I am reporting a commercial burglary at our warehouse facility where industrial equipment valued at over $10,000 was removed."
+  },
+  {
+    "input": "identity theft and bank fraud",
+    "output": "I am filing a report for identity theft; unauthorized individuals have opened multiple credit lines in my name and withdrawn significant funds from my accounts."
+  },
+  {
+    "input": "carjacking at gunpoint",
+    "output": "I, [Name], report that I was the victim of a carjacking at the intersection of [Street] and [Street], where my vehicle was taken by force at gunpoint."
+  },
+  {
+    "input": "corporate data breach and extortion",
+    "output": "I am reporting a cyber-attack on our company servers resulting in a massive data breach and subsequent extortion threats from the hackers."
+  },
+  {
+    "input": "vandalism and hate crime at community center",
+    "output": "I am filing a report for extensive property damage and hate-motivated graffiti found at the community center this morning."
+  },
+  {
+    "input": "kidnapping attempt near park",
+    "output": "I hereby report an attempted kidnapping incident where a suspect tried to force a minor into a vehicle near the city park entrance."
+  },
+  {
+    "input": "domestic violence incident",
+    "output": "I am reporting a domestic disturbance involving physical violence and threats at the residence located at [Address]."
+  },
+  {
+    "input": "narcotics distribution in neighborhood",
+    "output": "I wish to report suspicious activity consistent with large-scale narcotics distribution occurring at the property on [Street Name]."
+  },
+  {
+    "input": "arson of abandoned building",
+    "output": "I am filing a report for a suspected arson case where an abandoned warehouse was intentionally set on fire."
+  },
+  {
+    "input": "shoplifting ring at department store",
+    "output": "I report an organized retail theft incident where a group of individuals systematically cleared several shelves of high-end apparel."
+  },
+  {
+    "input": "embezzlement of company funds",
+    "output": "I am reporting the discovery of long-term embezzlement of company funds by a former employee totaling approximately $50,000."
+  },
+  {
+    "input": "illegal firearm possession",
+    "output": "I wish to report an individual in possession of an unregistered firearm and high-capacity magazines at a public gathering."
+  },
+  {
+    "input": "ransomware attack on hospital",
+    "output": "I am filing a report regarding a ransomware attack that has encrypted critical patient databases at [Hospital Name]."
+  },
+  {
+    "input": "human trafficking suspicion",
+    "output": "I hereby report suspicious activity at a local motel that may be indicative of human trafficking operations."
+  },
+  {
+    "input": "money laundering through shell company",
+    "output": "I am reporting financial irregularities and evidence of money laundering connected to the entity [Company Name]."
+  },
+  {
+    "input": "bribery of a public official",
+    "output": "I wish to report an instance of attempted bribery involving a contractor and a local government official."
+  },
+  {
+    "input": "stolen identity used for tax fraud",
+    "output": "I am filing a report for tax-related identity theft after a fraudulent return was filed using my Social Security number."
+  },
+  {
+    "input": "animal cruelty and neglect",
+    "output": "I report an extreme case of animal cruelty and neglect involving multiple malnourished animals at [Address]."
+  },
+  {
+    "input": "elder abuse at care facility",
+    "output": "I am filing a report for suspected physical and financial abuse of an elderly resident at the [Facility Name]."
+  },
+  {
+    "input": "hit and run resulting in injury",
+    "output": "I wish to report a hit and run accident where a pedestrian was struck and seriously injured by a driver who fled the scene."
+  },
+  {
+    "input": "counterfeit currency distribution",
+    "output": "I am reporting the circulation of high-quality counterfeit $100 bills at various retail locations in the district."
+  },
+  {
+    "input": "illegal dumping of hazardous waste",
+    "output": "I hereby report the illegal disposal of industrial chemicals into the local waterway by an unidentified truck."
+  },
+  {
+    "input": "stalking and harassment",
+    "output": "I am filing a formal report for persistent stalking and digital harassment by an individual known as [Suspect Name]."
+  },
+  {
+    "input": "theft of high-value artwork",
+    "output": "I report the theft of a valuable painting from a private gallery, estimated to be worth over $100,000."
+  },
+  {
+    "input": "smuggling of contraband",
+    "output": "I wish to report information regarding the smuggling of illegal contraband across the state border via commercial shipping."
+  },
+  {
+    "input": "election interference or fraud",
+    "output": "I am reporting observed irregularities and potential voter intimidation at the local polling station."
+  },
+  {
+    "input": "workplace sabotage",
+    "output": "I am filing a report for intentional sabotage of manufacturing equipment which resulted in a dangerous industrial accident."
+  },
+  {
+    "input": "securities fraud and insider trading",
+    "output": "I wish to report suspicious trading patterns and potential insider information leaks within [Firm Name]."
+  },
+  {
+    "input": "assault on a police officer",
+    "output": "I am reporting an incident where a law enforcement officer was physically assaulted during a routine traffic stop."
+  },
+  {
+    "input": "theft of trade secrets",
+    "output": "I hereby report the theft of proprietary software code and trade secrets by a departing staff member."
+  },
+  {
+    "input": "unauthorized access to government systems",
+    "output": "I am filing a report for a cybersecurity breach targeting the municipal records database."
+  },
+  {
+    "input": "extortion of a small business owner",
+    "output": "I report that a local business owner is being extorted for 'protection money' by a known criminal group."
+  },
+  {
+    "input": "mortgage fraud scheme",
+    "output": "I wish to report a complex mortgage fraud scheme involving forged documents and inflated property appraisals."
+  },
+  {
+    "input": "organized crime racketeering",
+    "output": "I am filing a report regarding racketeering activities and illegal gambling rings operating out of [Location]."
+  },
+  {
+    "input": "poisoning of livestock",
+    "output": "I report the intentional poisoning of several head of cattle on a private ranch located at [Address]."
+  },
+  {
+    "input": "sexual assault at university campus",
+    "output": "I am filing a formal report for a sexual assault incident that occurred in the dormitory area of the university."
+  },
+  {
+    "input": "child endangerment in home",
+    "output": "I hereby report a situation of severe child endangerment and unsafe living conditions at [Address]."
+  },
+  {
+    "input": "burglary of a jewelry store",
+    "output": "I am reporting a 'smash and grab' burglary at the jewelry store where the front display was shattered and high-end watches stolen."
+  },
+  {
+    "input": "theft of medical supplies",
+    "output": "I wish to report the large-scale theft of surgical supplies and medication from the hospital's secure storage."
+  },
+  {
+    "input": "insurance fraud via staged accident",
+    "output": "I am reporting a suspected staged collision intended to facilitate a fraudulent insurance claim."
+  },
+  {
+    "input": "impersonating a federal agent",
+    "output": "I report an individual who is identifying themselves as a federal agent to gain unauthorized access to private properties."
+  },
+  {
+    "input": "terroristic threats against school",
+    "output": "I am filing an emergency report regarding credible terroristic threats made against [School Name] via social media."
+  },
+  {
+    "input": "illegal logging in protected forest",
+    "output": "I wish to report large-scale illegal logging operations occurring within the national park boundaries."
+  },
+  {
+    "input": "obstruction of justice",
+    "output": "I am filing a report regarding the intentional destruction of evidence related to an ongoing criminal investigation."
+  },
+  {
+    "input": "tampering with consumer products",
+    "output": "I report an incident of product tampering where foreign objects were discovered inside sealed food packaging at the grocer."
+  },
+  {
+    "input": "theft of explosives from construction site",
+    "output": "I am filing a high-priority report regarding the theft of industrial blasting caps and explosives from a secure site."
+  },
+  {
+    "input": "trafficking of endangered wildlife",
+    "output": "I wish to report the illegal sale and trafficking of exotic and endangered animal species at [Market Location]."
+  },
+  {
+    "input": "interstate transport of stolen property",
+    "output": "I am reporting a ring involved in the interstate transport and resale of stolen luxury vehicles."
+  },
+  {
+    "input": "violation of a restraining order",
+    "output": "I report a dangerous violation of a standing protection order by an individual who appeared at my place of work."
+  },
+  {
+    "input": "hacking of financial institution",
+    "output": "I am filing a report for a sophisticated cyber-attack targeting the core banking system of [Bank Name]."
+  },
+  {
+    "input": "theft of historical artifacts",
+    "output": "I wish to report the theft of several irreplaceable historical artifacts from the city museum."
+  },
+  {
+    "input": "grand larceny of construction machinery",
+    "output": "I report the theft of a heavy-duty excavator and bulldozer from the highway expansion project."
+  },
+  {
+    "input": "witness intimidation",
+    "output": "I am filing a report for severe witness intimidation involving threats of physical harm against a person scheduled to testify."
+  },
+  {
+    "input": "unlawful imprisonment",
+    "output": "I hereby report a case of unlawful imprisonment where an individual was held against their will in a basement at [Address]."
+  },
+  {
+    "input": "phishing scam targeting seniors",
+    "output": "I am reporting a widespread phishing scam specifically targeting elderly residents to steal their retirement savings."
+  },
+  {
+    "input": "theft of social security funds",
+    "output": "I wish to report the fraudulent redirection of Social Security benefits belonging to [Name] into an unknown account."
+  },
+  {
+    "input": "arson of a place of worship",
+    "output": "I am filing a report for an arson attack on a local church which resulted in significant structural damage."
+  },
+  {
+    "input": "illegal arms trade",
+    "output": "I report the suspected sale of illegal automatic weapons occurring at a private residence."
+  },
+  {
+    "input": "misappropriation of public funds",
+    "output": "I am reporting the misappropriation of a government grant intended for local infrastructure projects."
+  },
+  {
+    "input": "theft of identity from deceased persons",
+    "output": "I wish to report a 'ghosting' scam where the identities of deceased individuals are being used for fraudulent loans."
+  },
+  {
+    "input": "vessel theft from marina",
+    "output": "I am filing a report for the theft of a 30-foot yacht from the marina, valued at over $200,000."
+  },
+  {
+    "input": "cyberstalking of a minor",
+    "output": "I report a serious case of cyberstalking and online grooming targeting a minor through a gaming platform."
+  },
+  {
+    "input": "theft of rare coins from private collection",
+    "output": "I am filing a report for a home robbery where a rare coin collection worth approximately $40,000 was stolen."
+  },
+  {
+    "input": "illegal gambling den operation",
+    "output": "I wish to report the operation of an illegal high-stakes gambling den in the basement of [Business Name]."
+  },
+  {
+    "input": "credit card skimming at pump",
+    "output": "I am reporting the discovery of a credit card skimming device installed on a gas station pump at [Location]."
+  },
+  {
+    "input": "theft of proprietary research data",
+    "output": "I report the unauthorized extraction of confidential medical research data from the university server."
+  },
+  {
+    "input": "bank robbery with hostage situation",
+    "output": "I am filing an emergency report regarding a bank robbery in progress that has escalated into a hostage situation."
+  },
+  {
+    "input": "organized copper theft from utility lines",
+    "output": "I wish to report the systematic theft of copper wiring from the regional power grid infrastructure."
+  },
+  {
+    "input": "fraudulent investment scheme (Ponzi)",
+    "output": "I am filing a report against an investment firm that appears to be operating a Ponzi scheme, affecting dozens of local investors."
+  },
+  {
+    "input": "battery resulting in permanent disability",
+    "output": "I report a violent physical battery incident that has resulted in permanent injury and disability for the victim."
+  },
+  {
+    "input": "theft of military equipment",
+    "output": "I am filing a high-level report for the theft of tactical gear and communications equipment from the armory."
+  },
+  {
+    "input": "passport forgery ring",
+    "output": "I wish to report a sophisticated operation producing forged passports and visas out of a local print shop."
+  },
+  {
+    "input": "grand theft of electronics from shipping container",
+    "output": "I am reporting the theft of a full shipping container of smartphones from the port terminal."
+  },
+  {
+    "input": "theft of radioactive materials",
+    "output": "I hereby report the missing of industrial-grade radioactive isotopes from a medical laboratory."
+  },
+  {
+    "input": "sim swapping fraud",
+    "output": "I am filing a report for a SIM-swapping attack that allowed hackers to bypass 2FA and drain my cryptocurrency wallet."
+  },
+  {
+    "input": "illegal pharmaceutical manufacturing",
+    "output": "I wish to report a suspected clandestine laboratory producing counterfeit pharmaceuticals in a residential area."
+  },
+  {
+    "input": "breaking and entering with intent to commit a felony",
+    "output": "I report an intruder who broke into my home while armed with a weapon, clearly intending to commit a violent act."
+  },
+  {
+    "input": "theft of corporate aircraft parts",
+    "output": "I am filing a report for the theft of high-value avionics and engine parts from a private hangar."
+  },
+  {
+    "input": "malicious wounding",
+    "output": "I wish to report an incident where a victim was maliciously wounded with a knife during a street robbery."
+  },
+  {
+    "input": "illegal sale of prescription drugs",
+    "output": "I am reporting the open sale of prescription painkillers by an individual outside the [Location] transit station."
+  },
+  {
+    "input": "fraudulent charity scam",
+    "output": "I wish to report a fake charity organization that is soliciting donations under the guise of disaster relief."
+  },
+  {
+    "input": "theft of precious metals from industrial site",
+    "output": "I am filing a report for the theft of several kilograms of platinum and gold used in industrial manufacturing."
+  },
+  {
+    "input": "cyber-espionage against tech firm",
+    "output": "I report evidence of state-sponsored cyber-espionage targeting our firm's intellectual property."
+  },
+  {
+    "input": "mass retail theft (flash mob)",
+    "output": "I am reporting a coordinated 'flash mob' style theft where 20+ individuals looted a luxury storefront in minutes."
+  },
+  {
+    "input": "tampering with a witness in a federal case",
+    "output": "I wish to report attempts to bribe or threaten a witness involved in an upcoming federal trial."
+  },
+  {
+    "input": "unauthorized use of heavy artillery or explosives",
+    "output": "I am reporting the illegal use of high-grade explosives in a residential neighborhood."
+  },
+  {
+    "input": "forgery of legal deeds and titles",
+    "output": "I am filing a report regarding the forgery of property deeds to illegally transfer ownership of a building."
+  },
+  {
+    "input": "hacking of municipal infrastructure (water/power)",
+    "output": "I report a targeted attempt to disrupt the city's water treatment facility via unauthorized network access."
+  },
+  {
+    "input": "theft of rare books from library vault",
+    "output": "I am filing a report for the theft of several first-edition rare books from the library's secure archival vault."
+  },
+  {
+    "input": "illegal organ trafficking",
+    "output": "I wish to report information regarding a suspected illegal organ trafficking ring operating through local clinics."
+  },
+  {
+    "input": "looting during a state of emergency",
+    "output": "I am reporting multiple incidents of looting at commercial properties during the current civil unrest."
+  },
+  {
+    "input": "possession of child exploitation material",
+    "output": "I am filing a report regarding the discovery of illegal and exploitative digital material on a shared computer."
+  },
+  {
+    "input": "theft of autonomous vehicle technology",
+    "output": "I wish to report the corporate theft of proprietary algorithms for autonomous driving by a rival competitor."
+  },
+  {
+    "input": "smuggling of ivory and exotic furs",
+    "output": "I report the seizure of illegal ivory tusks and endangered animal furs at a local shipping depot."
+  },
+  {
+    "input": "theft of state secrets (espionage)",
+    "output": "I am filing a report concerning the potential leak of classified government documents to a foreign entity."
+  },
+  {
+    "input": "environmental terrorism (pipeline sabotage)",
+    "output": "I hereby report the intentional damage and sabotage of a fuel pipeline, causing significant environmental damage."
+  },
+  {
+    "input": "report of a homicide",
+    "output": "I am filing an emergency report regarding a homicide discovered at [Location]; a deceased individual was found with signs of foul play."
+  },
+  {
+    "input": "kidnapping of a minor from school",
+    "output": "I hereby report the abduction of a minor child who was seen being forced into a vehicle outside the school gates this afternoon."
+  },
+  {
+    "input": "sexual assault at private residence",
+    "output": "I am filing a formal report for a sexual assault and rape that occurred at [Address] during the late hours of [Date]."
+  },
+  {
+    "input": "human rights violation by authority",
+    "output": "I wish to report a severe violation of human rights involving the unlawful detention and mistreatment of individuals by local officials."
+  },
+  {
+    "input": "missing person under suspicious circumstances",
+    "output": "I am reporting a missing person, [Name], whose disappearance suggests a potential kidnapping or foul play given the state of their residence."
+  },
+  {
+    "input": "attempted murder with a firearm",
+    "output": "I, [Name], am reporting an attempted murder where a suspect discharged a firearm at a victim with clear intent to kill."
+  },
+  {
+    "input": "gang-related shooting in public",
+    "output": "I am reporting a violent shooting incident involving multiple suspects that appears to be gang-affiliated, occurring at [Location]."
+  },
+  {
+    "input": "hostage situation in office building",
+    "output": "I am filing an emergency report regarding an ongoing hostage situation where an armed individual has barricaded themselves with employees."
+  },
+  {
+    "input": "trafficking of minors for labor",
+    "output": "I wish to report a suspected human trafficking ring involving the exploitation and forced labor of minors at an industrial site."
+  },
+  {
+    "input": "rape and physical battery report",
+    "output": "I am filing a report for a violent incident involving both physical battery and sexual assault against a victim at [Address]."
+  },
+  {
+    "input": "contract killing or hit-man activity",
+    "output": "I am reporting credible evidence of a conspiracy to commit murder involving a hired individual and a targeted victim."
+  },
+  {
+    "input": "mass casualty event/shooting",
+    "output": "I am reporting a mass shooting incident at [Location] with multiple casualties; emergency medical and tactical units are requested immediately."
+  },
+  {
+    "input": "aggravated kidnapping for ransom",
+    "output": "I hereby report a kidnapping where the perpetrators have contacted the family demanding a specific ransom for the safe return of the victim."
+  },
+  {
+    "input": "statutory rape and exploitation",
+    "output": "I am filing a report regarding the sexual exploitation and statutory rape of a minor by an adult individual known as [Name]."
+  },
+  {
+    "input": "hate crime resulting in death",
+    "output": "I am reporting a homicide that appears to be a hate crime, motivated by the victim's race and religious background."
+  },
+  {
+    "input": "discovery of a clandestine burial site",
+    "output": "I report the discovery of human remains in a shallow grave, suggesting a hidden homicide at [Location]."
+  },
+  {
+    "input": "armed home invasion and assault",
+    "output": "I am filing a report for an armed home invasion where residents were bound and physically assaulted during a robbery."
+  },
+  {
+    "input": "violation of international maritime law",
+    "output": "I wish to report an act of piracy and violent seizure of a vessel in international waters."
+  },
+  {
+    "input": "chemical attack or poisoning",
+    "output": "I am reporting a suspected intentional poisoning of a public water supply, constituting a major violation of public safety."
+  },
+  {
+    "input": "serial predator active in area",
+    "output": "I am filing a report regarding a series of linked sexual assaults that suggest the presence of a serial predator in the [District] area."
+  },
+  {
+    "input": "infanticide or child murder",
+    "output": "I am reporting the tragic death of an infant under circumstances indicating intentional harm and homicide."
+  },
+  {
+    "input": "labor camp and slavery violation",
+    "output": "I wish to report a facility where workers are being held against their will in conditions of modern-day slavery and forced labor."
+  },
+  {
+    "input": "kidnapping of a foreign diplomat",
+    "output": "I am filing a high-priority report regarding the abduction of a diplomatic official from the embassy district."
+  },
+  {
+    "input": "deadly assault with a knife",
+    "output": "I report a stabbing incident at [Location] where the victim has sustained life-threatening injuries following a violent dispute."
+  },
+  {
+    "input": "genocide or mass atrocity report",
+    "output": "I am filing a report regarding coordinated mass killings and systemic violence against a specific ethnic group in the region."
+  },
+  {
+    "input": "vehicular homicide/manslaughter",
+    "output": "I wish to report a fatal hit-and-run where the driver's extreme negligence and speed resulted in the death of a pedestrian."
+  },
+  {
+    "input": "unlawful medical experimentation",
+    "output": "I am reporting a severe ethical and legal violation involving non-consensual medical procedures performed on vulnerable populations."
+  },
+  {
+    "input": "kidnapping by an estranged parent",
+    "output": "I am reporting a parental abduction where a child was taken in violation of a court-ordered custody agreement and a restraining order."
+  },
+  {
+    "input": "drugging and subsequent assault",
+    "output": "I am filing a report for a 'date rape' incident where the victim was incapacitated with a sedative before being sexually assaulted."
+  },
+  {
+    "input": "torture and aggravated battery",
+    "output": "I hereby report a case of kidnapping where the victim was subjected to prolonged physical torture and severe battery."
+  },
+  {
+    "input": "poisoning with intent to kill",
+    "output": "I wish to report an individual who intentionally spiked a victim's food with a lethal dose of a toxic substance."
+  },
+  {
+    "input": "murder-suicide incident",
+    "output": "I am reporting a tragic incident at [Address] involving a suspected murder followed by the perpetrator's suicide."
+  },
+  {
+    "input": "human organ harvesting",
+    "output": "I am filing a report regarding a criminal enterprise involved in the forced removal and illegal sale of human organs."
+  },
+  {
+    "input": "violation of Geneva Convention",
+    "output": "I wish to report war crimes involving the intentional targeting of civilian populations and medical facilities."
+  },
+  {
+    "input": "cyber-kidnapping/virtual ransom",
+    "output": "I am reporting a scam where perpetrators convinced a family their child was kidnapped, extorting a ransom while the child was isolated."
+  },
+  {
+    "input": "serial arson resulting in fatalities",
+    "output": "I report a series of intentional fires set in residential buildings that have resulted in multiple deaths."
+  },
+  {
+    "input": "assassination of a political leader",
+    "output": "I am filing a report regarding the targeted killing of a public official at a campaign rally."
+  },
+  {
+    "input": "forced disappearance by secret police",
+    "output": "I wish to report the extrajudicial abduction and forced disappearance of an activist by unidentified security forces."
+  },
+  {
+    "input": "gang-style execution",
+    "output": "I report the discovery of a victim who appears to have been executed in a targeted gangland-style slaying."
+  },
+  {
+    "input": "abduction of a newborn from hospital",
+    "output": "I am filing an emergency report for a code pink incident involving the kidnapping of a baby from the maternity ward."
+  },
+  {
+    "input": "aggravated sodomy and assault",
+    "output": "I am filing a report for a violent sexual assault involving aggravated sodomy and physical trauma."
+  },
+  {
+    "input": "conspiracy to commit mass murder",
+    "output": "I wish to report intercepted communications and materials indicating a planned mass-casualty attack on a public venue."
+  },
+  {
+    "input": "murder of a law enforcement officer",
+    "output": "I am reporting the fatal shooting of a police officer in the line of duty during an active pursuit."
+  },
+  {
+    "input": "trafficking of human remains",
+    "output": "I report the illegal excavation and international trafficking of human skeletal remains for black market sale."
+  },
+  {
+    "input": "incitement to violence and riots",
+    "output": "I am filing a report against an individual for systematically inciting a crowd to commit acts of murder and arson."
+  },
+  {
+    "input": "forced sterilization violation",
+    "output": "I wish to report a systemic violation of reproductive rights involving the forced sterilization of women in state custody."
+  },
+  {
+    "input": "kidnapping of hikers in remote area",
+    "output": "I report that a group of hikers has been taken hostage by armed militants in the [Mountain/Forest] region."
+  },
+  {
+    "input": "assault with intent to commit rape",
+    "output": "I am filing a report regarding a suspect who cornered a victim and attempted a sexual assault before being interrupted."
+  },
+  {
+    "input": "felony murder during a robbery",
+    "output": "I report that a bystander was killed during the commission of an armed bank robbery at [Location]."
+  },
+  {
+    "input": "use of child soldiers violation",
+    "output": "I am filing a report regarding the illegal recruitment and use of children in active combat by an armed insurgent group."
+  },
+  {
+    "input": "death due to extreme neglect",
+    "output": "I report the death of a dependent adult due to intentional starvation and medical neglect by their primary caregiver."
+  },
+  {
+    "input": "organized stalking leading to violence",
+    "output": "I wish to report a 'gang stalking' case that has escalated into a physical assassination attempt on the victim."
+  },
+  {
+    "input": "kidnapping via social media lure",
+    "output": "I am reporting the abduction of a teenager who was lured to a meeting location by a predator posing as a peer online."
+  },
+  {
+    "input": "rape of an unconscious victim",
+    "output": "I am filing a report for a sexual assault that occurred while the victim was incapacitated due to alcohol or medication."
+  },
+  {
+    "input": "homicide involving domestic terrorism",
+    "output": "I report a fatal bombing incident motivated by extremist political ideologies at a government office."
+  },
+  {
+    "input": "torture of a prisoner of war",
+    "output": "I wish to report a violation of international law involving the physical and psychological torture of a captured combatant."
+  },
+  {
+    "input": "smuggling of victims across borders",
+    "output": "I am reporting a human smuggling operation where victims are being transported in life-threatening conditions inside a freight truck."
+  },
+  {
+    "input": "murder of a witness in a federal trial",
+    "output": "I am filing a report regarding the retaliatory killing of a protected witness scheduled to testify in a high-profile case."
+  },
+  {
+    "input": "gang rape incident report",
+    "output": "I hereby report a heinous crime involving the sexual assault of a victim by multiple perpetrators at [Location]."
+  },
+  {
+    "input": "kidnapping of an infant for illegal adoption",
+    "output": "I am reporting a criminal ring that abducts infants to sell them through fraudulent international adoption channels."
+  },
+  {
+    "input": "death by dangerous driving (street racing)",
+    "output": "I report a fatal collision caused by illegal street racing that resulted in the death of an innocent driver."
+  },
+  {
+    "input": "extrajudicial killing by vigilantes",
+    "output": "I wish to report a mob-led execution of a suspect without trial, constituting a grave violation of the law."
+  },
+  {
+    "input": "forced marriage and sexual slavery",
+    "output": "I am filing a report for a victim held in domestic servitude and forced into a non-consensual marriage against their will."
+  },
+  {
+    "input": "homicide of a journalist",
+    "output": "I report the targeted assassination of a reporter known for investigating organized crime and corruption."
+  },
+  {
+    "input": "kidnapping of a bus full of students",
+    "output": "I am filing an emergency report regarding the hijacking and kidnapping of a school bus and its passengers."
+  },
+  {
+    "input": "indecent liberties with a child",
+    "output": "I wish to report a case of felony child molestation and violation of trust by a person in a position of authority."
+  },
+  {
+    "input": "biological weapon deployment",
+    "output": "I am reporting the intentional release of a harmful biological agent in a densely populated urban area."
+  },
+  {
+    "input": "murder using a deadly toxin",
+    "output": "I report a death that appears to be caused by the administration of a rare and untraceable paralytic agent."
+  },
+  {
+    "input": "abduction and forced labor at sea",
+    "output": "I wish to report 'sea slavery' where individuals are kidnapped and forced to work on fishing trawlers for years."
+  },
+  {
+    "input": "rape used as a weapon of war",
+    "output": "I am filing a report regarding systemic sexual violence used by an occupying force to terrorize the local population."
+  },
+  {
+    "input": "homicide of a minor in foster care",
+    "output": "I report the suspicious death of a child within the foster care system, indicating possible physical abuse."
+  },
+  {
+    "input": "kidnapping of a high-net-worth individual",
+    "output": "I am reporting the professional abduction of a CEO from their private residence by a tactical team."
+  },
+  {
+    "input": "sexual assault in a correctional facility",
+    "output": "I wish to report a violation involving the sexual assault of an inmate by a staff member at the state prison."
+  },
+  {
+    "input": "death resulting from a hate-filled arson",
+    "output": "I report a fatal fire at a synagogue that was intentionally set with the intent to kill worshippers."
+  },
+  {
+    "input": "human experimentation without consent",
+    "output": "I am filing a report regarding a pharmaceutical company testing dangerous drugs on residents without their knowledge."
+  },
+  {
+    "input": "kidnapping of a bride (bride kidnapping)",
+    "output": "I wish to report a violent abduction where a woman was taken against her will to be forced into marriage."
+  },
+  {
+    "input": "murder of an elderly person for inheritance",
+    "output": "I report a suspicious death of a senior citizen where there is evidence of foul play involving a family member's financial gain."
+  },
+  {
+    "input": "aggravated rape with a deadly weapon",
+    "output": "I am filing a report for a sexual assault where the perpetrator used a knife to threaten the victim's life."
+  },
+  {
+    "input": "targeted killing of a religious leader",
+    "output": "I report the assassination of a prominent cleric during a religious service at [Place of Worship]."
+  },
+  {
+    "input": "kidnapping and identity theft (total takeover)",
+    "output": "I am reporting a case where a victim was abducted and held while the suspects drained their life savings using their identity."
+  },
+  {
+    "input": "death due to corporate manslaughter",
+    "output": "I wish to report an industrial disaster where gross negligence by the board of directors led to the deaths of 50 workers."
+  },
+  {
+    "input": "abduction of a tourist for political leverage",
+    "output": "I report the kidnapping of a foreign national by an insurgent group seeking the release of political prisoners."
+  },
+  {
+    "input": "rape and torture of a political dissident",
+    "output": "I am filing a report for the state-sanctioned abuse and sexual torture of an individual held in a secret detention center."
+  },
+  {
+    "input": "homicide using a booby-trapped device",
+    "output": "I report a fatal explosion caused by a package bomb delivered to a residential address."
+  },
+  {
+    "input": "trafficking of infants for illegal trade",
+    "output": "I wish to report an underground network involved in the purchase and sale of newborn babies across state lines."
+  },
+  {
+    "input": "kidnapping of a witness before a grand jury",
+    "output": "I am filing an emergency report regarding a key witness who was abducted hours before their scheduled testimony."
+  },
+  {
+    "input": "assault and battery with intent to maim",
+    "output": "I report a violent attack where the suspect used acid to permanently disfigure and maim the victim."
+  },
+  {
+    "input": "murder by strangulation",
+    "output": "I am reporting a domestic homicide where the victim was found deceased due to manual strangulation."
+  },
+  {
+    "input": "mass kidnapping of village residents",
+    "output": "I wish to report a raid by an armed militia where entire families were abducted from their homes."
+  },
+  {
+    "input": "violation of chemical weapons convention",
+    "output": "I am filing a report regarding the use of nerve agents against a civilian population during a local conflict."
+  },
+  {
+    "input": "homicide of a public defender",
+    "output": "I report the fatal shooting of a lawyer in the courthouse parking lot, likely related to a current criminal case."
+  },
+  {
+    "input": "sexual assault of a person with disabilities",
+    "output": "I am filing a report for the rape of a non-verbal individual at a long-term care facility."
+  },
+  {
+    "input": "kidnapping and forced use as a human shield",
+    "output": "I wish to report an incident where civilians were abducted and used as shields during a shootout with police."
+  },
+  {
+    "input": "death by poisoning (cyanide)",
+    "output": "I report a suspicious death where autopsy results confirmed the presence of lethal levels of cyanide."
+  },
+  {
+    "input": "targeted killing of an environmental activist",
+    "output": "I am filing a report regarding the murder of a leader fighting against illegal mining in the rainforest."
+  },
+  {
+    "input": "rape and murder (cold case discovery)",
+    "output": "I report the discovery of DNA evidence linking a suspect to a 20-year-old unsolved rape and homicide case."
+  },
+  {
+    "input": "abduction of a child from a playground",
+    "output": "I am filing an emergency report for a stranger abduction that occurred at the city park playground at 4:00 PM."
+  },
+  {
+    "input": "murder of a pregnant woman (fetal homicide)",
+    "output": "I report a violent homicide where a pregnant victim was killed, resulting in the death of the unborn child as well."
+  },
+  {
+    "input": "massacre of civilians in a rural area",
+    "output": "I wish to report a discovery of a mass grave containing dozens of civilians executed by a paramilitary group."
+  },
+  {
+    "input": "kidnapping and torture for secret information",
+    "output": "I am filing a report regarding a corporate spy who was abducted and tortured to reveal trade secrets."
+  }
+]

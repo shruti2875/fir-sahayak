@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  /* 🌿 Backgrounds */
+  --color-primary: #F9FAFB;      /* Main background (soft white) */
+  --color-secondary: #FFFFFF;    /* Cards / sections */
+
+  /* 🎯 Accent (Government Style) */
+  --color-accent: #FF9933;       /* Saffron (Indian govt feel) */
+  --color-accent-dark: #E68900;
+
+  /* 📊 Status colors */
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-danger: #DC2626;
+
+  /* 📝 Text */
+  --color-text-primary: #1F2937;   /* Dark gray */
+  --color-text-secondary: #6B7280; /* Light gray */
+
+  /* 🔲 Borders */
+  --color-border: #E5E7EB;
+
+  /* 🔤 Font */
+  --font-sans: "Inter", "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* 🌍 Base Styling */
+@layer base {
+  body {
+    @apply bg-[var(--color-primary)] text-[var(--color-text-primary)] font-sans antialiased;
+  }
+}
+
+/* 📦 Card Style (Clean Govt Look) */
+.glass {
+  @apply bg-[var(--color-secondary)] border border-[var(--color-border)] shadow-sm rounded-xl;
+}
+
+/* ❌ Remove dark theme (keep same for consistency) */
+.glass-dark {
+  @apply bg-[var(--color-secondary)] border border-[var(--color-border)] shadow-sm rounded-xl;
+}
+
+/* 🔘 Button Style (Primary Action) */
+.btn-primary {
+  @apply bg-[var(--color-accent)] hover:bg-[var(--color-accent-dark)] text-white font-semibold py-2 px-4 rounded-lg transition;
+}
+
+/* 🧾 Input Fields */
+.input-field {
+  @apply w-full border border-[var(--color-border)] rounded-lg px-4 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-400;
+}
