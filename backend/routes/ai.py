@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, UploadFile, File
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, Response
 from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session 
@@ -252,17 +252,32 @@ async def download_pdf(request: PDFDownloadRequest):
             "en"
         )
         
-        return StreamingResponse(
-            iter([pdf_buffer.getvalue()]),
+        pdf_bytes = pdf_buffer.getvalue()
+        
+        if not pdf_bytes or len(pdf_bytes) == 0:
+            raise ValueError("PDF generation produced empty content")
+        
+        return Response(
+            content=pdf_bytes,
             media_type="application/pdf",
-            headers={"Content-Disposition": "attachment; filename=FIR_Report.pdf"}
+            headers={
+                "Content-Disposition": "attachment; filename=FIR_Report.pdf",
+                "Content-Length": str(len(pdf_bytes)),
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
         )
         
     except Exception as e:
-        return {
-            "error": str(e),
-            "message": "Failed to generate PDF"
-        }
+        import traceback
+        print(f"PDF Generation Error: {e}")
+        traceback.print_exc()
+        return Response(
+            content=f'{{"error": "{str(e)}", "message": "Failed to generate PDF"}}',
+            status_code=500,
+            media_type="application/json"
+        )
     
     
     

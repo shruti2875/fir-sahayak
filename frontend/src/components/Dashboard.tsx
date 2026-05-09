@@ -311,17 +311,27 @@ const FIRMessage: React.FC<{
     setDownloadingPDF(true);
     try {
       const pdf = await downloadFIRPDF(msg.content);
+      
+      // Validate blob
+      if (!pdf || pdf.size === 0) {
+        throw new Error("PDF is empty or invalid");
+      }
+      
       const url = window.URL.createObjectURL(pdf);
       const a = document.createElement('a');
       a.href = url;
       a.download = `FIR_Report_${new Date().getTime()}.pdf`;
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      
+      // Delay revoke to ensure download completes
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }, 100);
     } catch (err) {
       console.error("PDF download failed:", err);
-      alert("Failed to download PDF");
+      alert("Failed to download PDF. Please try again.");
     } finally {
       setDownloadingPDF(false);
     }
