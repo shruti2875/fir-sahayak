@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Plus, Send, User, Shield, LogOut, X, Trash2, Pin, PinOff, Upload, Image as ImageIcon } from "lucide-react";
 import jsPDF from "jspdf";
-import { Language, Message, Chat, User as UserType, ImageAnalysisResult } from "../types";
+import { Language, Message, Chat, User as UserType, ImageAnalysisResult, IPCSection } from "../types";
 import { TRANSLATIONS } from "../constants";
 import { generateSmartFIR, analyzeImage, downloadFIRPDF } from "../services/firService";
 
@@ -13,7 +13,6 @@ interface DashboardProps {
   onLogout: () => void;
   onChangeStation: () => void;
 }
-
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function uid() {
@@ -342,8 +341,15 @@ const FIRMessage: React.FC<{
   const suggestionsList = toList(meta?.suggestions);
   const missingList     = toList(meta?.missing_info);
   const similarCases    = meta?.similar_cases ?? [];
-  const hasMeta = meta && (suggestionsList.length || missingList.length || similarCases.length);
-
+  const ipcSections = meta?.ipc_sections ?? [];
+  const hasMeta =
+  meta &&
+  (
+    suggestionsList.length ||
+    missingList.length ||
+    similarCases.length ||
+    ipcSections.length
+  );
   return (
     <>
       <div className="bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm max-w-2xl">
@@ -390,6 +396,82 @@ const FIRMessage: React.FC<{
                 Confidence: {meta!.confidence}
               </span>
             )}
+            {ipcSections.length > 0 && (
+  <div className="w-full mt-5">
+
+    <h3 className="text-red-600 font-bold text-sm mb-3">
+      ⚖ Suggested IPC Sections
+    </h3>
+
+    <div className="space-y-3">
+
+      {ipcSections.map((ipc, index) => (
+
+        <div
+          key={index}
+          className="
+            border
+            border-red-200
+            bg-red-50
+            rounded-xl
+            p-4
+          "
+        >
+
+          <div className="flex items-center justify-between">
+
+            <h4 className="font-bold text-red-700">
+              {ipc.ipc_section}
+            </h4>
+
+            <span className="
+              text-xs
+              bg-white
+              border
+              rounded-full
+              px-2
+              py-1
+              text-gray-500
+            ">
+              Score: {ipc.score}
+            </span>
+
+          </div>
+
+          <p className="mt-2 font-medium text-gray-800">
+            {ipc.offense}
+          </p>
+
+          <p className="mt-1 text-sm text-gray-600">
+            {ipc.description}
+          </p>
+
+          <div className="
+            mt-3
+            bg-white
+            border
+            rounded-lg
+            p-3
+          ">
+
+            <p className="text-xs font-semibold text-gray-500 uppercase">
+              Punishment
+            </p>
+
+            <p className="text-sm text-gray-700 mt-1">
+              {ipc.punishment}
+            </p>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+)}
           </div>
         )}
       </div>
@@ -577,14 +659,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
         station: u.stationName,
       });
 
-      const data = await generateSmartFIR(
+      const data = (await generateSmartFIR(
         text,
         lang,
         u.officerName,
         u.location,
         u.contact,
         u.stationName
-      );
+      )) as {
+        fir: string;
+        missing_info: string | string[];
+        suggestions: string | string[];
+        confidence?: string;
+        similar_cases?: { description: string }[];
+        ipc_sections?: IPCSection[];
+      };
 
       console.log("📥 FIR Response:", data);
 
@@ -602,16 +691,26 @@ export const Dashboard: React.FC<DashboardProps> = ({
         role: "assistant",
         content: data.fir,
         meta: {
-          fir: data.fir,
-          missing_info: Array.isArray(data.missing_info)
-            ? data.missing_info
-            : toList(data.missing_info ?? ""),
-          suggestions: Array.isArray(data.suggestions)
-            ? data.suggestions
-            : toList(data.suggestions ?? ""),
-          confidence: data.confidence ?? "Unknown",
-          similar_cases: Array.isArray(data.similar_cases) ? data.similar_cases : [],
-        },
+  fir: data.fir,
+
+  missing_info: Array.isArray(data.missing_info)
+    ? data.missing_info
+    : toList(data.missing_info ?? ""),
+
+  suggestions: Array.isArray(data.suggestions)
+    ? data.suggestions
+    : toList(data.suggestions ?? ""),
+
+  confidence: data.confidence ?? "Unknown",
+
+  similar_cases: Array.isArray(data.similar_cases)
+    ? data.similar_cases
+    : [],
+
+  ipc_sections: Array.isArray(data.ipc_sections)
+    ? (data.ipc_sections as IPCSection[])
+    : [],
+},
         timestamp: new Date(),
       };
 

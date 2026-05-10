@@ -168,3 +168,16 @@ CREATE TABLE IF NOT EXISTS chat_history (
     role VARCHAR(10),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE IF NOT EXISTS ipc_knowledge (
+
+    ipc_id SERIAL PRIMARY KEY,
+
+    ipc_section TEXT,
+    offense TEXT,
+    description TEXT,
+    punishment TEXT,
+
+    embedding vector(384)
+);

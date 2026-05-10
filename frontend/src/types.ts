@@ -24,6 +24,7 @@ export interface Message {
     suggestions: string[] | string;
     confidence: string;
     similar_cases: { description: string }[];
+    ipc_sections?: IPCSection[];
   };
 }
 
@@ -49,4 +50,12 @@ export interface EvidenceItem {
   content: string;
   extractedInfo?: string;
   timestamp: Date;
+}
+
+export interface IPCSection {
+  ipc_section: string;
+  offense: string;
+  description: string;
+  punishment: string;
+  score: number;
 }

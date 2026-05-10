@@ -60,42 +60,56 @@ def parse_llm_response(content: str) -> dict:
 
 # ✅ Get language-specific instruction
 def get_language_instruction(language: str) -> str:
-    """
-    Returns strong language instructions
-    for multilingual FIR generation
-    """
 
     if language == "hi":
-        return """
-Generate the FIR in formal Hindi language
-using official Indian police complaint style.
 
-Requirements:
-- Use professional Hindi
-- Use realistic police terminology
-- Maintain FIR structure
-- Avoid casual language
+        return """
+Generate the COMPLETE FIR entirely in Hindi.
+
+STRICT RULES:
+- ALL headings must be in Hindi
+- ALL content must be in Hindi
+- DO NOT use English sentences
+- DO NOT mix Hindi and English
+- Use formal police/legal Hindi language
+
+Use headings like:
+सेवा में,
+विषय:
+घटना का विवरण:
+दिनांक एवं समय:
+स्थान:
+शिकायतकर्ता:
 """
 
     elif language == "mr":
-        return """
-मराठीत अधिकृत पोलिस FIR स्वरूपात उत्तर द्या.
 
-सूचना:
-- व्यावसायिक आणि औपचारिक भाषा वापरा
-- वास्तविक पोलिस FIR शैली वापरा
-- अनौपचारिक शब्द टाळा
-- FIR चे योग्य स्वरूप ठेवा
+        return """
+संपूर्ण FIR पूर्णपणे मराठीत तयार करा.
+
+कडक नियम:
+- सर्व शीर्षके मराठीत असावीत
+- संपूर्ण मजकूर मराठीत असावा
+- इंग्रजी आणि मराठी मिसळू नका
+- औपचारिक पोलिस भाषा वापरा
+
+उदाहरण शीर्षके:
+प्रति,
+विषय:
+घटनेचा तपशील:
+दिनांक व वेळ:
+ठिकाण:
+तक्रारदार:
 """
 
-    return """
-Generate the FIR in formal professional English
-using official Indian police complaint format.
+    else:
+
+        return """
+Generate the COMPLETE FIR entirely in formal English.
 
 Requirements:
-- Use realistic FIR wording
-- Maintain professional tone
-- Use proper legal/police style
+- Use professional Indian police FIR format
+- Use realistic legal wording
 - Avoid robotic AI-style language
 """
 
@@ -115,7 +129,7 @@ def generate_fir(
         "Content-Type": "application/json"
     }
     
-    # ✅ USE OFFICER DETAILS IF PROVIDED
+    #  USE OFFICER DETAILS IF PROVIDED
     if officer_details is None:
         officer_details = {}
     
@@ -263,105 +277,190 @@ def generate_fir_with_context(
     )
 
     # ✅ OFFICIAL INDIAN POLICE FIR FORMAT - NO PLACEHOLDERS
+    # ✅ MULTILINGUAL FIR TEMPLATE
+
+    if language == "mr":
+
+        fir_template = f"""
+    प्रति,
+    पोलीस निरीक्षक,
+    {station_name_val}
+    महाराष्ट्र
+
+    दिनांक: {today_date}
+
+    विषय: चोरी / गुन्हा संदर्भात तक्रार अर्ज
+
+    महोदय,
+
+    मी, {complainant_name_val},
+    रा. {complainant_address_val},
+    मोबाईल क्रमांक: {complainant_contact_val},
+
+    याद्वारे खालीलप्रमाणे तक्रार नोंदवत आहे:
+
+    घटनेचा तपशील:
+
+    * दिनांक व वेळ: [तक्रारीतील माहिती]
+    * ठिकाण: [घटनेचे ठिकाण]
+    * वर्णन: [घटनेचे संपूर्ण वर्णन]
+    * चोरी / नुकसान: [चोरी गेलेली वस्तू]
+    * साक्षीदार: [असल्यास नमूद करा]
+
+    सदर घटनेबाबत योग्य ती कायदेशीर कारवाई करण्यात यावी ही विनंती.
+
+    धन्यवाद.
+
+    आपला विश्वासू,
+
+    {complainant_name_val}
+
+    ---
+
+    स्वीकारणारे अधिकारी:
+
+    {officer_name}
+    {officer_rank}
+    {station_name_val}
+    संपर्क: {officer_contact}
+    """
+
+    elif language == "hi":
+
+        fir_template = f"""
+    प्रति,
+    थाना प्रभारी,
+    {station_name_val}
+    महाराष्ट्र
+
+    दिनांक: {today_date}
+
+    विषय: चोरी / अपराध संबंधी शिकायत पत्र
+
+    महोदय,
+
+    मैं, {complainant_name_val},
+    निवासी: {complainant_address_val},
+    मोबाइल नंबर: {complainant_contact_val},
+
+    निम्नलिखित घटना की शिकायत दर्ज करवाना चाहता/चाहती हूँ:
+
+    घटना का विवरण:
+
+    * दिनांक एवं समय: [घटना का समय]
+    * स्थान: [घटना का स्थान]
+    * विवरण: [घटना का संपूर्ण विवरण]
+    * चोरी / नुकसान: [चोरी हुई वस्तु]
+    * गवाह: [यदि कोई हो]
+
+    कृपया मेरी शिकायत दर्ज कर आवश्यक कानूनी कार्रवाई करने की कृपा करें।
+
+    धन्यवाद।
+
+    भवदीय,
+
+    {complainant_name_val}
+
+    ---
+
+    प्राप्तकर्ता अधिकारी:
+
+    {officer_name}
+    {officer_rank}
+    {station_name_val}
+    संपर्क: {officer_contact}
+    """
+
+    else:
+
+        fir_template = f"""
+    TO,
+    The Officer In-Charge
+    {station_name_val}
+    {station_location}
+
+    Date: {today_date}
+
+    Subject: Complaint regarding reported incident
+
+    Respected Sir/Madam,
+
+    I, {complainant_name_val},
+    residing at {complainant_address_val},
+    Contact Number: {complainant_contact_val},
+
+    would like to report the following incident:
+
+    DETAILS OF THE INCIDENT:
+
+    * Date and Time: [Incident time]
+    * Location: [Incident location]
+    * Description: [Complete incident description]
+    * Items Involved: [Stolen item / damage]
+    * Witnesses: [If any]
+
+    I request you to kindly register this complaint and take necessary legal action.
+
+    Thanking You.
+
+    Yours faithfully,
+
+    {complainant_name_val}
+
+    ---
+
+    Received By:
+
+    {officer_name}
+    {officer_rank}
+    {station_name_val}
+    Contact: {officer_contact}
+    """
+
+    # ✅ FINAL PROMPT
+
     prompt = f"""
-You are an expert police FIR drafting assistant for Indian Police.
+    You are an expert Indian Police FIR drafting assistant.
 
-{lang_instruction}
+    LANGUAGE: {language}
 
-=== POLICE STATION DETAILS (REAL DATA) ===
-Officer Name: {officer_name}
-Officer Rank: {officer_rank}
-Station Name: {station_name_val}
-Station Address: {station_location}
-Station Contact: {station_contact}
-Officer Contact: {officer_contact}
+    IMPORTANT:
+    - Marathi input → FULL Marathi FIR
+    - Hindi input → FULL Hindi FIR
+    - English input → FULL English FIR
+    - NEVER mix languages
+    - NEVER keep headings in English for Marathi/Hindi
+    - Keep police station names unchanged
 
-=== USER COMPLAINT ===
-{text}
+    USER COMPLAINT:
+    {text}
 
-=== SIMILAR FIR EXAMPLES (REFERENCE ONLY) ===
-{context}
+    SIMILAR FIR REFERENCES:
+    {context}
 
-=== INSTRUCTIONS ===
-Generate a COMPLETE, FORMAL, OFFICIAL FIR using EXACTLY this format. 
-DO NOT USE PLACEHOLDERS - FILL ALL FIELDS WITH PROVIDED DATA ABOVE.
+    STRICT RULES:
+    1. FIR must look like a REAL Indian police complaint
+    2. Use formal legal language
+    3. Do NOT invent fake facts
+    4. If information missing write:
+    "Not mentioned in complaint"
+    5. Keep realistic police tone
+    6. FIR should be from complainant perspective
+    7. Officer details only in footer
+    8. Return ONLY valid JSON
+    9. NO markdown
+    10. NO triple backticks
 
----
-FIR FORMAT:
+    FIR FORMAT:
+    {fir_template}
 
-TO,
-The Officer In-Charge
-{station_name_val}
-{station_location}
-
-Date: {today_date}
-
-Subject: Complaint regarding reported incident
-
-Respected Sir/Madam,
-
-I, {complainant_name_val},
-residing at {complainant_address_val},
-Contact Number: {complainant_contact_val},
-would like to report the following incident:
-
-DETAILS OF THE INCIDENT:
-
-* Date and Time: [Extract from complaint if available]
-* Location: [Extract exact location from complaint]
-* Description: [Write a clear, formal, professional description based on complaint]
-* Items Involved: [Mention stolen/damaged items if any]
-* Witnesses: [Mention if available, otherwise write "None mentioned"]
-
-I request you to kindly register this complaint and take necessary legal action regarding the matter.
-
-Thanking You.
-
-Yours faithfully,
-
-[Complainant Name]
-
----
-
-Received By:
-
-{officer_name}
-{officer_rank}
-{station_name_val}
-Contact: {officer_contact}
-
----
-
-=== STRICT REQUIREMENTS ===
-
-1. FIR MUST be written from COMPLAINANT perspective
-2. Police officer details should ONLY appear in footer/signature
-3. NEVER make officer the complainant
-4. NEVER use fake ranks like "3 star"
-5. Use official Indian police complaint style
-6. If information is missing, write "Not mentioned in complaint"
-7. Keep FIR realistic and professional
-8. missing_info MUST be JSON array
-9. suggestions MUST be JSON array
-10. Return ONLY valid raw JSON
-11. NO markdown
-12. NO triple backticks
-13. FIR must look like an actual Indian police complaint document
-14. Use realistic wording used in police complaints
-15. Avoid robotic or AI sounding language
-16. Never repeat the complaint unnecessarily
-17. Use concise professional paragraphs
-18. Do not invent facts not present in complaint
-
-=== JSON RESPONSE FORMAT ===
-{{
-  "fir": "complete formatted FIR text exactly as shown above, preserving all newlines and formatting",
-  "missing_info": ["specific missing information 1", "specific missing information 2"],
-  "suggestions": ["investigation action 1", "investigation action 2", "legal article to apply"]
-}}
-
-Remember: This is a REAL FIR for official Indian police use. Be professional and accurate.
-"""
+    JSON RESPONSE:
+    {{
+    "fir": "full FIR text",
+    "missing_info": ["missing field 1", "missing field 2"],
+    "suggestions": ["suggestion 1", "suggestion 2"]
+    }}
+    """
 
     data = {
         "model": "mistral-small",
@@ -467,58 +566,108 @@ Return as JSON:
         }
 
 # ✅ PDF GENERATION USING REPORTLAB
-def generate_fir_pdf(fir_text: str, complainant_name: str = "", incident_date: str = "", 
-                     incident_location: str = "", language: str = "en"):
+def generate_fir_pdf(
+    fir_text: str,
+    complainant_name: str = "",
+    incident_date: str = "",
+    incident_location: str = "",
+    language: str = "en"
+):
     """
-    Generate a professional FIR PDF using ReportLab
+    Generate multilingual FIR PDF
+    Supports:
+    - English
+    - Hindi
+    - Marathi
     """
+
     try:
-        from reportlab.lib.pagesizes import letter, A4
+        from reportlab.lib.pagesizes import A4
         from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle, Preformatted
+        from reportlab.platypus import (
+            SimpleDocTemplate,
+            Paragraph,
+            Spacer,
+            Table,
+            TableStyle,
+            Preformatted
+        )
         from reportlab.lib.units import inch
         from reportlab.lib import colors
+
+        from reportlab.pdfbase import pdfmetrics
+        from reportlab.pdfbase.ttfonts import TTFont
+
         from datetime import datetime
+        from pathlib import Path
         import io
-        
-        # Sanitize fir_text - escape special HTML characters
+
+        # =====================================================
+        # REGISTER UNICODE FONT (Hindi + Marathi support)
+        # =====================================================
+
+        font_path = (
+            Path(__file__).resolve().parent.parent
+            / "fonts"
+            / "NotoSansDevanagari-Regular.ttf"
+        )
+
+        pdfmetrics.registerFont(
+            TTFont("NotoDevanagari", str(font_path))
+        )
+
+        # =====================================================
+        # Escape HTML chars
+        # =====================================================
+
         def escape_html(text):
             if not text:
                 return ""
+
             text = str(text)
+
             text = text.replace("&", "&amp;")
             text = text.replace("<", "&lt;")
             text = text.replace(">", "&gt;")
             text = text.replace('"', "&quot;")
             text = text.replace("'", "&apos;")
+
             return text
-        
-        # Create PDF in memory
+
+        # =====================================================
+        # Create PDF
+        # =====================================================
+
         pdf_buffer = io.BytesIO()
+
         doc = SimpleDocTemplate(
             pdf_buffer,
             pagesize=A4,
-            rightMargin=0.75*inch,
-            leftMargin=0.75*inch,
-            topMargin=0.75*inch,
-            bottomMargin=0.75*inch,
+            rightMargin=0.75 * inch,
+            leftMargin=0.75 * inch,
+            topMargin=0.75 * inch,
+            bottomMargin=0.75 * inch,
             title="FIR Report"
         )
-        
+
         styles = getSampleStyleSheet()
+
         elements = []
-        
-        # Custom styles
+
+        # =====================================================
+        # STYLES
+        # =====================================================
+
         title_style = ParagraphStyle(
             'CustomTitle',
             parent=styles['Heading1'],
             fontSize=16,
             textColor=colors.HexColor('#1F2937'),
             spaceAfter=12,
-            alignment=1,  # Center
-            fontName='Helvetica-Bold'
+            alignment=1,
+            fontName='NotoDevanagari'
         )
-        
+
         heading_style = ParagraphStyle(
             'CustomHeading',
             parent=styles['Heading2'],
@@ -526,91 +675,169 @@ def generate_fir_pdf(fir_text: str, complainant_name: str = "", incident_date: s
             textColor=colors.HexColor('#374151'),
             spaceAfter=6,
             spaceBefore=12,
-            fontName='Helvetica-Bold',
-            borderColor=colors.HexColor('#E5E7EB'),
-            borderPadding=8
+            fontName='NotoDevanagari'
         )
-        
+
         body_style = ParagraphStyle(
             'CustomBody',
             parent=styles['Normal'],
             fontSize=10,
             textColor=colors.HexColor('#1F2937'),
-            alignment=4,  # Justified
+            alignment=4,
             spaceAfter=8,
-            leading=14
+            leading=18,
+            fontName='NotoDevanagari'
         )
-        
-        # FIR Header
-        elements.append(Paragraph("FIRST INFORMATION REPORT (FIR)", title_style))
-        elements.append(Spacer(1, 0.2*inch))
-        
-        # Meta Information Table
+
+        # =====================================================
+        # TITLE
+        # =====================================================
+
+        title_text = "FIRST INFORMATION REPORT (FIR)"
+
+        if language == "hi":
+            title_text = "प्रथम सूचना रिपोर्ट (FIR)"
+
+        elif language == "mr":
+            title_text = "प्रथम माहिती अहवाल (FIR)"
+
+        elements.append(
+            Paragraph(title_text, title_style)
+        )
+
+        elements.append(
+            Spacer(1, 0.2 * inch)
+        )
+
+        # =====================================================
+        # TABLE
+        # =====================================================
+
         meta_data = [
             ["Field", "Details"],
             ["Report Date", datetime.now().strftime("%d-%m-%Y %H:%M")],
             ["Location", escape_html(incident_location or "Not Specified")],
-            ["Complainant", escape_html(complainant_name or "Officer")],
+            ["Complainant", escape_html(complainant_name or "Not Specified")],
             ["Incident Date", incident_date or datetime.now().strftime("%d-%m-%Y")],
         ]
-        
-        meta_table = Table(meta_data, colWidths=[1.5*inch, 4*inch])
+
+        meta_table = Table(
+            meta_data,
+            colWidths=[1.5 * inch, 4 * inch]
+        )
+
         meta_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#F3F4F6')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#111827')),
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+
+            ('FONTNAME', (0, 0), (-1, -1), 'NotoDevanagari'),
+
             ('FONTSIZE', (0, 0), (-1, 0), 11),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+
             ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#E5E7EB')),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#F9FAFB')]),
-            ('FONTSIZE', (0, 1), (-1, -1), 10),
+
+            ('ROWBACKGROUNDS',
+             (0, 1),
+             (-1, -1),
+             [colors.white, colors.HexColor('#F9FAFB')]
+            ),
+
             ('PADDING', (0, 0), (-1, -1), 8),
         ]))
-        
+
         elements.append(meta_table)
-        elements.append(Spacer(1, 0.3*inch))
-        
-        # FIR Details Section
-        elements.append(Paragraph("INCIDENT DESCRIPTION", heading_style))
-        
-        # Use sanitized text - replace newlines with <br/> for better formatting
+
+        elements.append(
+            Spacer(1, 0.3 * inch)
+        )
+
+        # =====================================================
+        # INCIDENT HEADING
+        # =====================================================
+
+        incident_heading = "INCIDENT DESCRIPTION"
+
+        if language == "hi":
+            incident_heading = "घटना का विवरण"
+
+        elif language == "mr":
+            incident_heading = "घटनेचा तपशील"
+
+        elements.append(
+            Paragraph(incident_heading, heading_style)
+        )
+
+        # =====================================================
+        # FIR BODY
+        # =====================================================
+
         sanitized_fir_text = escape_html(fir_text)
         sanitized_fir_text = sanitized_fir_text.replace("\n", "<br/>")
-        
+
         try:
-            elements.append(Paragraph(sanitized_fir_text, body_style))
+
+            elements.append(
+                Paragraph(
+                    sanitized_fir_text,
+                    body_style
+                )
+            )
+
         except Exception as para_err:
-            print(f"Paragraph rendering error: {para_err}, using Preformatted instead")
-            # Fallback to preformatted text if Paragraph fails
-            elements.append(Preformatted(escape_html(fir_text), body_style))
-        
-        elements.append(Spacer(1, 0.3*inch))
-        
-        # Footer
-        elements.append(Spacer(1, 0.5*inch))
+
+            print(
+                f"Paragraph rendering error: {para_err}"
+            )
+
+            elements.append(
+                Preformatted(
+                    escape_html(fir_text),
+                    body_style
+                )
+            )
+
+        elements.append(
+            Spacer(1, 0.3 * inch)
+        )
+
+        # =====================================================
+        # FOOTER
+        # =====================================================
+
         footer_table = Table([
             ["___________________", "", "___________________"],
             ["Officer Signature", "", "Date"]
-        ], colWidths=[1.8*inch, 1*inch, 1.8*inch])
+        ], colWidths=[1.8 * inch, 1 * inch, 1.8 * inch])
+
         footer_table.setStyle(TableStyle([
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, -1), 'NotoDevanagari'),
             ('FONTSIZE', (0, 0), (-1, -1), 9),
             ('TOPPADDING', (0, 0), (-1, -1), 40),
         ]))
+
         elements.append(footer_table)
-        
-        # Build PDF
+
+        # =====================================================
+        # BUILD PDF
+        # =====================================================
+
         doc.build(elements)
+
         pdf_buffer.seek(0)
-        
+
         if pdf_buffer.getbuffer().nbytes == 0:
-            raise ValueError("PDF buffer is empty after build")
-        
+            raise ValueError("PDF buffer is empty")
+
         return pdf_buffer
-        
+
     except Exception as e:
+
         print(f"PDF Generation Error: {e}")
+
         import traceback
         traceback.print_exc()
+
         raise

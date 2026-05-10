@@ -3,6 +3,7 @@ from fastapi.responses import StreamingResponse, Response
 from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session 
+from backend.services.ipc import retrieve_ipc_sections
 from datetime import date
 import base64
 import io
@@ -141,7 +142,144 @@ def generate_smart_fir(request: AIRequest, db: Session = Depends(get_db)):
         language=request.language or "en",
         officer_details=officer_details,
     )
+        # ─────────────────────────────────────────────
+    # IPC SECTION RETRIEVAL
+    # ─────────────────────────────────────────────
 
+    ipc_sections = []
+
+    try:
+
+        ipc_embedding = str(
+            get_embedding(request.description)
+        )
+
+        ipc_rows = db.execute(text("""
+
+            SELECT
+                ipc_section,
+                offense,
+                description,
+                punishment,
+
+                embedding <-> CAST(:emb AS vector)
+                AS distance
+
+            FROM ipc_knowledge
+
+            ORDER BY distance
+
+            LIMIT 10
+
+        """), {
+            "emb": ipc_embedding
+        }).fetchall()
+
+        text_lower = request.description.lower()
+
+        for row in ipc_rows:
+
+            score = round(float(row[4]), 2)
+
+            # remove weak matches
+            if score > 1.2:
+                continue
+
+            combined = f"""
+            {row[0]}
+            {row[1]}
+            {row[2]}
+            """.lower()
+
+            # ❌ BLOCK IRRELEVANT IPC SECTIONS
+
+            blocked_keywords = [
+
+                "kidnap",
+                "abduct",
+                "child-stealing",
+                "thug",
+                "waging war",
+                "religion",
+                "printer",
+                "coin",
+                "airman",
+                "soldier",
+                "marriage",
+                "slave",
+                "sedition",
+                "suicide",
+                "harbour",
+                "state prisoner",
+                "beggary"
+            ]
+
+            # Skip irrelevant IPCs
+            if any(word in combined for word in blocked_keywords):
+                continue
+
+
+            # ✅ PHONE / SNATCHING FILTER
+
+            if any(word in text_lower for word in [
+
+                "phone",
+                "mobile",
+                "snatch",
+                "snatched",
+                "stolen",
+                "theft",
+                "robbery"
+            ]):
+
+                allowed_keywords = [
+
+                    "theft",
+                    "robbery",
+                    "dishonestly",
+                    "movable property",
+                    "criminal force",
+                    "receiving stolen property"
+                ]
+
+                if not any(word in combined for word in allowed_keywords):
+                    continue
+
+
+            # ❌ REMOVE WEAK MATCHES
+            if score > 1.18:
+                continue
+
+
+            # ❌ REMOVE DUPLICATE IPCS
+
+            existing_ipcs = [
+                ipc["ipc_section"]
+                for ipc in ipc_sections
+            ]
+
+            if row[0] in existing_ipcs:
+                continue
+
+            ipc_sections.append({
+
+                "ipc_section": row[0],
+                "offense": row[1],
+                "description": row[2][:300],
+                "punishment": row[3]
+                    if row[3]
+                    else "Punishment not specified",
+
+                "score": score
+            })
+
+        ipc_sections = ipc_sections[:3]
+
+        print("✅ IPC SECTIONS:", ipc_sections)
+
+    except Exception as e:
+
+        print("❌ IPC ERROR:", e)
     # ── STEP 4: Persist to DB (best-effort) ──────────────────────────────────
     try:
         fir_record = FIR(
@@ -186,16 +324,32 @@ def generate_smart_fir(request: AIRequest, db: Session = Depends(get_db)):
         print(f"DB save error (non-fatal): {e}")
         db.rollback()
 
+    
     # ── STEP 5: Return ───────────────────────────────────────────────────────
     return {
-        "fir":              output.get("fir", ""),
-        "missing_info":     output.get("missing_info", []),
-        "suggestions":      output.get("suggestions", []),
-        "confidence":       confidence,
-        "confidence_score": confidence_score,
-        "similar_cases":    similar_cases,
-        "input":            request.description,
-    }
+
+    "fir": output.get("fir"),
+
+    "missing_info": output.get(
+        "missing_info",
+        []
+    ),
+
+    "suggestions": output.get(
+        "suggestions",
+        []
+    ),
+
+    "confidence": confidence,
+
+    "confidence_score": confidence_score,
+
+    "similar_cases": similar_cases,
+
+    "ipc_sections": ipc_sections,
+
+    "input": request.description
+}
 
 # ✅ NEW: Image Analysis Endpoint
 @router.post("/analyze-image")
