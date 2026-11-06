@@ -111,7 +111,16 @@ export const LoginFlow: React.FC<LoginFlowProps> = ({ onLogin, language, savedSt
         rank: officer.rank,
       });
     } catch (err: any) {
-      setError(err.message || 'Authentication failed. Please check your credentials.');
+      const msg: string = err.message || '';
+      // If station no longer exists in DB, clear cache and restart from step 1
+      if (msg.toLowerCase().includes('station') || msg.includes('foreign') || msg.includes('500')) {
+        localStorage.removeItem('fir_station_data');
+        setStationId(null);
+        setStep(1);
+        setError('Station not found in database. Please re-enter station details.');
+      } else {
+        setError(msg || 'Authentication failed. Please check your credentials.');
+      }
     } finally {
       setLoading(false);
     }

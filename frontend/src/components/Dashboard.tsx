@@ -1,10 +1,11 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { Plus, Send, User, Shield, LogOut, X, Trash2, Pin, PinOff, Upload, Image as ImageIcon } from "lucide-react";
+import { Plus, Send, User, Shield, LogOut, X, Trash2, Pin, PinOff, Upload, Image as ImageIcon, Volume2,  Mic, Square, Loader2} from "lucide-react";
 import jsPDF from "jspdf";
 import { Language, Message, Chat, User as UserType, ImageAnalysisResult, IPCSection } from "../types";
 import { TRANSLATIONS } from "../constants";
 import { generateSmartFIR, analyzeImage, downloadFIRPDF } from "../services/firService";
+
 
 interface DashboardProps {
   user: UserType;
@@ -17,6 +18,41 @@ interface DashboardProps {
 
 function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+function encodeWav(samples: Float32Array, sampleRate: number): Blob {
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+
+  const writeString = (offset: number, value: string) => {
+    for (let i = 0; i < value.length; i++) {
+      view.setUint8(offset + i, value.charCodeAt(i));
+    }
+  };
+
+  writeString(0, "RIFF");
+  view.setUint32(4, 36 + samples.length * 2, true);
+  writeString(8, "WAVE");
+  writeString(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  writeString(36, "data");
+  view.setUint32(40, samples.length * 2, true);
+
+  let offset = 44;
+
+  for (let i = 0; i < samples.length; i++) {
+    const sample = Math.max(-1, Math.min(1, samples[i]));
+    const pcm = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+    view.setInt16(offset, pcm, true);
+    offset += 2;
+  }
+
+  return new Blob([buffer], { type: "audio/wav" });
 }
 
 function splitToItems(text: string): string[] {
@@ -305,6 +341,9 @@ const FIRMessage: React.FC<{
 }> = ({ msg, language, onSendInChat, onOpenNewChat }) => {
   const [modal, setModal] = React.useState<null | "suggestions" | "missing" | "similar">(null);
   const [downloadingPDF, setDownloadingPDF] = React.useState(false);
+  const [speaking, setSpeaking] = React.useState(false);
+  const [audioUrl, setAudioUrl] = React.useState<string | null>(null);
+  const [speechError, setSpeechError] = React.useState("");
 
   const downloadPDF = async () => {
     setDownloadingPDF(true);
@@ -335,6 +374,75 @@ const FIRMessage: React.FC<{
       setDownloadingPDF(false);
     }
   };
+  const handleSpeak = async () => {
+  if (speaking) return;
+
+  setSpeaking(true);
+  setSpeechError("");
+
+  try {
+    const API_BASE =
+      import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+
+    const languageCode =
+      language === "mr"
+        ? "mr-IN"
+        : language === "hi"
+        ? "hi-IN"
+        : "en-IN";
+
+    const response = await fetch(`${API_BASE}/voice/speak`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "audio/wav",
+      },
+      body: JSON.stringify({
+        text: msg.content,
+        language_code: languageCode,
+      }),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Unable to generate FIR audio.";
+
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.detail || errorMessage;
+      } catch {
+        // Keep the default error message.
+      }
+
+      throw new Error(errorMessage);
+    }
+
+    const audioBlob = await response.blob();
+
+    if (!audioBlob.size) {
+      throw new Error("The generated audio file is empty.");
+    }
+
+    const newAudioUrl = URL.createObjectURL(audioBlob);
+
+    setAudioUrl((previousUrl) => {
+      if (previousUrl) URL.revokeObjectURL(previousUrl);
+      return newAudioUrl;
+    });
+  } catch (error) {
+    console.error("Timbre TTS error:", error);
+    setSpeechError(
+      error instanceof Error ? error.message : "Audio generation failed."
+    );
+  } finally {
+    setSpeaking(false);
+  }
+};
+
+React.useEffect(() => {
+  return () => {
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+  };
+}, [audioUrl]);
 
   const meta = msg.meta;
 
@@ -357,6 +465,27 @@ const FIRMessage: React.FC<{
           FIR Draft
         </p>
         <p className="text-gray-800 text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+        {speechError && (
+  <p className="mt-3 text-xs text-red-600">
+    Audio error: {speechError}
+  </p>
+)}
+
+{audioUrl && (
+  <div className="mt-3 rounded-lg border border-purple-200 bg-purple-50 p-3">
+    <p className="text-xs font-medium text-purple-800 mb-2">
+      FIR Audio
+    </p>
+    <audio
+      controls
+      src={audioUrl}
+      className="w-full"
+      preload="none"
+    >
+      Your browser does not support audio playback.
+    </audio>
+  </div>
+)}
 
         {hasMeta && (
           <div className="mt-4 flex flex-wrap gap-2">
@@ -383,6 +512,14 @@ const FIRMessage: React.FC<{
             >
               📥 {downloadingPDF ? "Generating..." : "Download FIR"}
             </button>
+            <button
+  onClick={handleSpeak}
+  disabled={speaking}
+  className="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-lg hover:bg-purple-100 disabled:opacity-50 transition flex items-center gap-1"
+>
+  <Volume2 size={14} />
+  {speaking ? "Generating audio..." : "Listen to FIR"}
+</button>
             {similarCases.length > 0 && (
               <button
                 onClick={() => setModal("similar")}
@@ -519,7 +656,234 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onChangeStation,
 }) => {
   const t = TRANSLATIONS[language];
+  // ── Gnani Prisma microphone recording ───────────────────────────────
 
+const [isRecording, setIsRecording] = React.useState(false);
+const [isTranscribing, setIsTranscribing] = React.useState(false);
+const [voiceError, setVoiceError] = React.useState("");
+const [transcriptReady, setTranscriptReady] = React.useState(false);
+
+const audioContextRef = React.useRef<AudioContext | null>(null);
+const mediaStreamRef = React.useRef<MediaStream | null>(null);
+const processorRef = React.useRef<ScriptProcessorNode | null>(null);
+const sourceRef = React.useRef<MediaStreamAudioSourceNode | null>(null);
+const audioChunksRef = React.useRef<Float32Array[]>([]);
+const sampleRateRef = React.useRef(44100);
+const recordingFramesRef = React.useRef(0);
+
+const startRecording = async () => {
+  try {
+    setVoiceError("");
+    setTranscriptReady(false);
+    if (!navigator.mediaDevices?.getUserMedia) {
+      throw new Error("Microphone access is not supported by this browser.");
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        channelCount: 1,
+        echoCancellation: true,
+        noiseSuppression: true,
+      },
+    });
+
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as typeof window & {
+        webkitAudioContext?: typeof AudioContext;
+      }).webkitAudioContext;
+
+    if (!AudioContextClass) {
+      throw new Error("Web Audio API is not supported by this browser.");
+    }
+
+    const audioContext = new AudioContextClass();
+    await audioContext.resume();
+
+    const source = audioContext.createMediaStreamSource(stream);
+    const processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+    audioChunksRef.current = [];
+    recordingFramesRef.current = 0;
+    sampleRateRef.current = audioContext.sampleRate;
+
+    processor.onaudioprocess = (event) => {
+      const samples = event.inputBuffer.getChannelData(0);
+      audioChunksRef.current.push(new Float32Array(samples));
+      recordingFramesRef.current += samples.length;
+
+      // Automatically stop at 30 seconds.
+      if (recordingFramesRef.current >= audioContext.sampleRate * 30) {
+        void stopRecording();
+      }
+
+      // Prevent microphone audio from playing through speakers.
+      event.outputBuffer.getChannelData(0).fill(0);
+    };
+
+    source.connect(processor);
+    processor.connect(audioContext.destination);
+
+    mediaStreamRef.current = stream;
+    audioContextRef.current = audioContext;
+    sourceRef.current = source;
+    processorRef.current = processor;
+
+    setIsRecording(true);
+  } catch (error) {
+  console.error("Microphone error:", error);
+
+  let message = "Unable to start recording. Please try again.";
+
+  if (error instanceof DOMException) {
+    switch (error.name) {
+      case "NotAllowedError":
+        message =
+          "Microphone permission was denied. Allow microphone access in your browser settings, then try again.";
+        break;
+
+      case "NotFoundError":
+        message =
+          "No microphone was found. Connect or enable a microphone, then try again.";
+        break;
+
+      case "NotReadableError":
+        message =
+          "The microphone may be in use by another application. Close other recording apps and try again.";
+        break;
+
+      case "NotSupportedError":
+        message =
+          "This browser does not support the required audio features. Try the latest version of Chrome or Edge.";
+        break;
+
+      case "SecurityError":
+        message =
+          "Microphone access requires a secure connection. Open the app using localhost or HTTPS.";
+        break;
+    }
+  } else if (error instanceof Error) {
+    message = error.message;
+  }
+
+  setVoiceError(message);
+}
+};
+
+const stopRecording = async () => {
+  if (!isRecording && !audioContextRef.current) return;
+
+  setIsRecording(false);
+
+  const processor = processorRef.current;
+  const source = sourceRef.current;
+  const stream = mediaStreamRef.current;
+  const audioContext = audioContextRef.current;
+
+  processorRef.current = null;
+  sourceRef.current = null;
+  mediaStreamRef.current = null;
+  audioContextRef.current = null;
+
+  processor?.disconnect();
+  source?.disconnect();
+
+  stream?.getTracks().forEach((track) => track.stop());
+
+  if (audioContext && audioContext.state !== "closed") {
+    await audioContext.close();
+  }
+
+  const chunks = audioChunksRef.current;
+  audioChunksRef.current = [];
+
+  if (!chunks.length) {
+    setVoiceError("No audio was recorded. Please try again.");
+    return;
+  }
+
+  const totalLength = chunks.reduce(
+    (total, chunk) => total + chunk.length,
+    0
+  );
+
+  const samples = new Float32Array(totalLength);
+  let offset = 0;
+
+  for (const chunk of chunks) {
+    samples.set(chunk, offset);
+    offset += chunk.length;
+  }
+
+  const wavBlob = encodeWav(samples, sampleRateRef.current);
+
+  // Discard very short recordings.
+  if (wavBlob.size < 1000) {
+    setVoiceError("Recording is too short. Please speak for longer.");
+    return;
+  }
+
+  await transcribeRecording(wavBlob);
+};
+
+const transcribeRecording = async (wavBlob: Blob) => {
+  setIsTranscribing(true);
+  setVoiceError("");
+
+  try {
+    const API_BASE =
+      import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+
+    const languageCode =
+      language === "mr"
+        ? "mr-IN"
+        : language === "hi"
+        ? "hi-IN"
+        : "en-IN";
+
+    const formData = new FormData();
+    formData.append("audio", wavBlob, "complaint.wav");
+    formData.append("language_code", languageCode);
+
+    const response = await fetch(`${API_BASE}/voice/transcribe`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.detail || "Speech transcription failed."
+      );
+    }
+
+    const result = await response.json();
+
+    if (!result.transcript?.trim()) {
+      throw new Error("No speech was detected. Please try again.");
+    }
+
+    // Put the transcript in the existing editable complaint input.
+    setInput(result.transcript);
+    setTranscriptReady(true);
+  } catch (error) {
+  console.error("Transcription error:", error);
+
+  let message =
+    "Transcription failed. Please record your complaint again.";
+
+  if (error instanceof TypeError) {
+    message =
+      "Could not connect to FIR-Sahayak. Check that the backend is running and try again.";
+  } else if (error instanceof Error) {
+    message = error.message;
+  }
+
+  setVoiceError(message);
+} finally {
+  setIsTranscribing(false);
+} 
+};
   // Refs to always have latest language/user inside sendMessage without re-creating it
   const languageRef = React.useRef(language);
   const userRef = React.useRef(user);
@@ -960,22 +1324,212 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div ref={bottomRef} />
         </div>
 
-        <div className="shrink-0 px-5 py-4 border-t bg-white flex gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-            placeholder="Describe the incident..."
-            className="flex-1 border border-gray-300 bg-white text-black rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder:text-gray-400"
+
+<div className="shrink-0 px-5 py-3 border-t bg-white">
+  {/* Selected language and voice status */}
+  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+    <div className="flex items-center gap-2 text-xs text-gray-500">
+      <span className="font-medium text-gray-700">
+        Input language
+      </span>
+
+      <span className="rounded-full bg-gray-100 px-2.5 py-1 font-medium text-gray-700">
+        {language === "mr"
+          ? "मराठी (Marathi)"
+          : language === "hi"
+            ? "हिन्दी (Hindi)"
+            : "English"}
+      </span>
+    </div>
+
+    {isRecording && (
+      <span className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
+        <span className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
+        Recording
+      </span>
+    )}
+
+    {isTranscribing && (
+      <span className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700">
+        <Loader2 size={13} className="animate-spin" />
+        Transcribing
+      </span>
+    )}
+  </div>
+
+  {/* Recording indicator */}
+  {isRecording && (
+    <div
+      role="status"
+      aria-live="polite"
+      className="mb-3 flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3"
+    >
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-700">
+        <Mic size={18} />
+      </span>
+
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold text-red-800">
+          Listening to your complaint
+        </p>
+        <p className="text-xs text-red-700">
+          Speak clearly. Select Stop when you have finished.
+        </p>
+      </div>
+
+      <div className="flex h-7 items-center gap-1" aria-hidden="true">
+        {[0, 1, 2, 3, 4].map((bar) => (
+          <span
+            key={bar}
+            className="w-1 rounded-full bg-red-500 animate-pulse"
+            style={{
+              height: `${10 + (bar % 3) * 6}px`,
+              animationDelay: `${bar * 120}ms`,
+            }}
           />
-          <button
-            onClick={() => handleSend()}
-            disabled={!input.trim()}
-            className="bg-orange-500 hover:bg-orange-600 disabled:opacity-40 text-white px-4 rounded-xl transition"
-          >
-            <Send size={18} />
-          </button>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {/* Transcription progress */}
+  {isTranscribing && (
+    <div
+      role="status"
+      aria-live="polite"
+      className="mb-3 flex items-center gap-3 rounded-xl border border-purple-200 bg-purple-50 px-4 py-3"
+    >
+      <Loader2
+        size={20}
+        className="shrink-0 animate-spin text-purple-700"
+      />
+
+      <div>
+        <p className="text-sm font-semibold text-purple-900">
+          Converting speech into text
+        </p>
+        <p className="text-xs text-purple-700">
+          Gnani Prisma is processing your recording. Please wait…
+        </p>
+      </div>
+    </div>
+  )}
+
+  {/* Transcript review confirmation */}
+  {transcriptReady && !isRecording && !isTranscribing && (
+    <div
+      role="status"
+      aria-live="polite"
+      className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3"
+    >
+      <div className="flex items-start gap-2">
+        <span className="mt-0.5 text-emerald-700">✓</span>
+
+        <div>
+          <p className="text-sm font-semibold text-emerald-900">
+            Transcript ready — review before generating the FIR
+          </p>
+
+          <p className="mt-1 text-xs text-emerald-800">
+            Check names, dates, times, vehicle details and locations.
+            You can edit the transcript directly below.
+          </p>
         </div>
+      </div>
+    </div>
+  )}
+
+  {/* Voice error */}
+  {voiceError && (
+    <div
+      role="alert"
+      className="mb-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2.5 text-xs text-red-700"
+    >
+      <p className="font-semibold">Voice input problem</p>
+      <p className="mt-0.5">{voiceError}</p>
+    </div>
+  )}
+
+  {/* Input controls */}
+  <div className="flex gap-2 items-center">
+    <button
+      type="button"
+      onClick={isRecording ? stopRecording : startRecording}
+      disabled={isTranscribing}
+      title={isRecording ? "Stop recording" : "Record complaint"}
+      aria-label={isRecording ? "Stop recording" : "Start voice recording"}
+      className={`shrink-0 px-3 rounded-xl h-11 flex items-center justify-center gap-2 transition disabled:opacity-50 ${
+        isRecording
+          ? "bg-red-600 text-white hover:bg-red-700"
+          : "bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100"
+      }`}
+    >
+      {isRecording ? (
+        <>
+          <Square size={15} />
+          <span className="text-xs font-semibold">Stop</span>
+        </>
+      ) : (
+        <>
+          <Mic size={17} />
+          <span className="text-xs font-medium">Voice</span>
+        </>
+      )}
+    </button>
+
+    <input
+      value={input}
+      onChange={(e) => {
+        setInput(e.target.value);
+        setTranscriptReady(false);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          handleSend();
+        }
+      }}
+      placeholder={
+        isRecording
+          ? "Recording your complaint…"
+          : isTranscribing
+            ? "Transcribing your complaint…"
+            : transcriptReady
+              ? "Review and edit the transcript…"
+              : "Describe the incident or use Voice…"
+      }
+      disabled={isRecording || isTranscribing}
+      aria-label="Complaint description"
+      className="flex-1 min-w-0 border border-gray-300 bg-white text-black rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder:text-gray-400 disabled:bg-gray-100"
+    />
+
+    {isTranscribing ? (
+      <button
+        type="button"
+        disabled
+        aria-label="Transcription in progress"
+        className="bg-purple-100 text-purple-700 px-4 rounded-xl h-11"
+      >
+        <Loader2 size={18} className="animate-spin" />
+      </button>
+    ) : (
+      <button
+        type="button"
+        onClick={() => handleSend()}
+        disabled={!input.trim() || isRecording}
+        aria-label="Generate FIR from complaint"
+        className="bg-orange-500 hover:bg-orange-600 disabled:opacity-40 text-white px-4 rounded-xl h-11 transition"
+      >
+        <Send size={18} />
+      </button>
+    )}
+  </div>
+
+  <p className="text-[10px] text-gray-400 mt-2 ml-1">
+    Voice recording supports up to 30 seconds. Review and correct
+    the transcript before generating the FIR.
+  </p>
+</div>
+
       </div>
     </div>
   );

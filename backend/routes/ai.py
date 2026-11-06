@@ -110,6 +110,7 @@ def generate_smart_fir(request: AIRequest, db: Session = Depends(get_db)):
         SELECT fir_id, description, incident_location,
                embedding <-> CAST(:emb AS vector) AS distance
         FROM firs
+        WHERE embedding IS NOT NULL
         ORDER BY distance
         LIMIT 5
     """), {"emb": query_embedding}).fetchall()
@@ -120,6 +121,8 @@ def generate_smart_fir(request: AIRequest, db: Session = Depends(get_db)):
     for row in rows:
         desc = row[1]
         location = row[2]
+        if row[3] is None:
+            continue
         dist = float(row[3])
         if desc not in seen and dist < 1.2:
             seen.add(desc)
