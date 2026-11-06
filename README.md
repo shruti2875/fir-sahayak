@@ -5,6 +5,11 @@ FIR-Sahayak is an AI-powered platform designed to make police complaint drafting
 
 Built as part of the **Great Indian AI Internship Challenge by Gnani AI**, the project demonstrates how speech AI and language technologies can support more accessible digital public services.
 
+## 🎥 Project Demo
+
+- **YouTube Demo:** [Watch FIR-Sahayak Demo](https://youtu.be/u7lhT1WctXw)
+- **LinkedIn Post:** [View FIR-Sahayak Project Post](https://lnkd.in/p/dvjUKM_W)
+
 ---
 
 ## 🎯 Problem Statement
