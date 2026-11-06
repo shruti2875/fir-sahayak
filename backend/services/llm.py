@@ -8,11 +8,13 @@ from dotenv import load_dotenv
 # Load .env from the backend directory regardless of where uvicorn is launched from
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
-API_KEY = os.getenv("MISTRAL_API_KEY", "")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
-if not API_KEY:
-    print("WARNING: MISTRAL_API_KEY not set — FIR generation will fail")
+if not GROQ_API_KEY:
+    print("WARNING: GROQ_API_KEY not set — FIR generation will fail")
 
 def parse_llm_response(content: str) -> dict:
     """Parse LLM JSON response. missing_info and suggestions stay as lists."""
@@ -68,10 +70,13 @@ Generate the COMPLETE FIR entirely in Hindi.
 
 STRICT RULES:
 - ALL headings must be in Hindi
-- ALL content must be in Hindi
-- DO NOT use English sentences
-- DO NOT mix Hindi and English
+- ALL FIR content must be in Hindi
+- DO NOT use any English words or phrases inside the FIR text
+- Do not mix Hindi and English
 - Use formal police/legal Hindi language
+- Preserve the exact facts from the user complaint
+- Do not invent, change, or omit names, dates, locations, values, or key details
+- If the complaint is written in English, translate the facts exactly into Hindi without changing meaning
 
 Use headings like:
 सेवा में,
@@ -89,9 +94,12 @@ Use headings like:
 
 कडक नियम:
 - सर्व शीर्षके मराठीत असावीत
-- संपूर्ण मजकूर मराठीत असावा
-- इंग्रजी आणि मराठी मिसळू नका
+- संपूर्ण FIR मजकूर मराठीत असावा
+- मराठी आणि इंग्रजी मिसळू नका
 - औपचारिक पोलिस भाषा वापरा
+- वापरकर्त्याच्या तक्रारीतील तथ्यांची अचूक नोंद घ्या
+- नावं, दिनांक, स्थाने, वस्तू किंवा इतर मुख्य तपशील बदलू नका
+- जर तक्रार इंग्रजीत असेल तर तथ्ये अचूकपणे मराठीत अनुवाद करा
 
 उदाहरण शीर्षके:
 प्रति,
@@ -111,6 +119,9 @@ Requirements:
 - Use professional Indian police FIR format
 - Use realistic legal wording
 - Avoid robotic AI-style language
+- Preserve the exact facts from the user complaint
+- Do not invent, change, or omit names, dates, locations, values, or key details
+- If the complaint is in Hindi or Marathi, translate the facts exactly into English without changing meaning
 """
 
 # ✅ Basic FIR generation
@@ -123,9 +134,9 @@ def generate_fir(
     complainant_contact: str = "",
     station_name: str = ""
 ):
-    url = "https://api.mistral.ai/v1/chat/completions"
+    url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
-        "Authorization": f"Bearer {API_KEY}",
+        "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
     }
     
@@ -143,6 +154,9 @@ def generate_fir(
 You are a formal police FIR drafting assistant.
 
 {lang_instruction}
+
+Use the exact facts from the user complaint. Do not invent, alter, or omit names, dates, locations, items, or other key details.
+If the complaint is in a different language than the requested FIR language, translate the facts exactly without changing meaning.
 
 Generate a complete, formal FIR using EXACTLY this format:
 
@@ -182,6 +196,9 @@ User Complaint:
 {text}
 
 Rules:
+- Preserve the complaint facts exactly as written
+- Do not change the meaning of the complaint
+- Do not invent or add new facts
 - Fill ALL placeholders using complaint details
 - Use [placeholder] only when info is truly missing
 - Keep language formal and professional
@@ -196,8 +213,10 @@ JSON format:
 """
 
     data = {
-        "model": "mistral-small",
-        "messages": [{"role": "user", "content": prompt}]
+        "model": GROQ_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.2,
+        "response_format": {"type": "json_object"}
     }
     response = requests.post(url, headers=headers, json=data)
     res = response.json()
@@ -231,9 +250,9 @@ def generate_fir_with_context(
     - station_location: str
     - station_contact: str
     """
-    url = "https://api.mistral.ai/v1/chat/completions"
+    url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
-        "Authorization": f"Bearer {API_KEY}",
+        "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
     }
 
@@ -417,7 +436,6 @@ def generate_fir_with_context(
     Contact: {officer_contact}
     """
 
-    # ✅ FINAL PROMPT
 
     prompt = f"""
     You are an expert Indian Police FIR drafting assistant.
@@ -428,9 +446,12 @@ def generate_fir_with_context(
     - Marathi input → FULL Marathi FIR
     - Hindi input → FULL Hindi FIR
     - English input → FULL English FIR
-    - NEVER mix languages
-    - NEVER keep headings in English for Marathi/Hindi
+    - NEVER mix languages in the FIR text
+    - NEVER keep headings in English for Marathi/Hindi FIR text
     - Keep police station names unchanged
+    - Preserve the exact facts from the complaint
+    - Do not invent, change, or omit names, dates, locations, items, or other key details
+    - If the complaint is written in a different language than the FIR language, translate the facts exactly without changing meaning
 
     USER COMPLAINT:
     {text}
@@ -442,14 +463,15 @@ def generate_fir_with_context(
     1. FIR must look like a REAL Indian police complaint
     2. Use formal legal language
     3. Do NOT invent fake facts
-    4. If information missing write:
+    4. Keep user complaint facts unchanged
+    5. If information missing write:
     "Not mentioned in complaint"
-    5. Keep realistic police tone
-    6. FIR should be from complainant perspective
-    7. Officer details only in footer
-    8. Return ONLY valid JSON
-    9. NO markdown
-    10. NO triple backticks
+    6. Keep realistic police tone
+    7. FIR should be from complainant perspective
+    8. Officer details only in footer
+    9. Return ONLY valid JSON
+    10. NO markdown
+    11. NO triple backticks
 
     FIR FORMAT:
     {fir_template}
@@ -463,8 +485,10 @@ def generate_fir_with_context(
     """
 
     data = {
-        "model": "mistral-small",
-        "messages": [{"role": "user", "content": prompt}]
+        "model": GROQ_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.2,
+        "response_format": {"type": "json_object"}
     }
     
     try:
@@ -472,11 +496,11 @@ def generate_fir_with_context(
         res = response.json()
 
         if response.status_code == 401:
-            raise ValueError("Mistral API key is invalid or expired. Update MISTRAL_API_KEY in backend/.env")
+            raise ValueError("Groq API key is invalid or expired. Check GROQ_API_KEY in backend/.env")
         if response.status_code != 200:
-            raise ValueError(f"Mistral API error {response.status_code}: {res}")
+            raise ValueError(f"Groq API error {response.status_code}: {res}")
         if "choices" not in res:
-            raise ValueError(f"Unexpected Mistral response: {res}")
+            raise ValueError(f"Unexpected Groq response: {res}")
 
         content = (
             res.get("choices", [{}])[0]

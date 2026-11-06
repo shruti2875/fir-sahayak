@@ -1,0 +1,17 @@
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: fir-sahayak-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: fir_sahayak_password
+      POSTGRES_DB: fir_sahayak
+    ports:
+      - "5432:5432"
+    volumes:
+      - fir_sahayak_data:/var/lib/postgresql/data
+
+volumes:
+  fir_sahayak_data:

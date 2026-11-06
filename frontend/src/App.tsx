@@ -2,6 +2,7 @@ import React from 'react';
 import { LoginFlow } from './components/LoginFlow';
 import { Dashboard } from './components/Dashboard';
 import { Language, User } from './types';
+import { getStationByName } from './services/firService';
 
 const STATION_KEY = 'fir_station_data';
 
@@ -24,6 +25,16 @@ export default function App() {
       return null;
     }
   });
+
+  // Validate saved station against DB on startup — clear if it no longer exists
+  React.useEffect(() => {
+    if (!savedStation) return;
+    getStationByName(savedStation.stationName).catch(() => {
+      // Station not found in DB (e.g. DB was reset) — clear stale cache
+      localStorage.removeItem(STATION_KEY);
+      setSavedStation(null);
+    });
+  }, []);
 
   const handleLogin = (userData: User) => {
     const stationData: SavedStation = {

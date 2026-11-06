@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.db.database import engine, Base
 from backend.routes import station, officer, fir, ai
 from pydantic import BaseModel
+from backend.routes import voice
+
 
 app = FastAPI()
 
@@ -28,6 +30,8 @@ app.include_router(station.router)
 app.include_router(officer.router)
 app.include_router(fir.router)
 app.include_router(ai.router)
+app.include_router(voice.router)
+
 
 @app.get("/")
 def home():

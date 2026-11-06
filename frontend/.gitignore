@@ -1,8 +1,20 @@
+# Python environments
+.venv/
+.venv312/
+venv/
+env/
+
+# Node dependencies
 node_modules/
-build/
+
+# Build files
 dist/
-coverage/
-.DS_Store
-*.log
-.env*
-!.env.example
+build/
+
+# Environment variables
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.pyc
