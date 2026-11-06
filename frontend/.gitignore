@@ -1,20 +1,11 @@
-# Python environments
 .venv/
 .venv312/
 venv/
 env/
-
-# Node dependencies
 node_modules/
-
-# Build files
-dist/
-build/
-
-# Environment variables
-.env
-.env.*
-
-# Python cache
 __pycache__/
 *.pyc
+.env
+.env.*
+dist/
+build/
